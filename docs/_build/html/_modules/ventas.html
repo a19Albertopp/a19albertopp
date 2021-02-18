@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ventas &#8212; documentación de a19albertopp - v0.5.2</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para ventas</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">PyQt5.QtGui</span> <span class="kn">import</span> <span class="n">QFont</span>
+
+<span class="kn">import</span> <span class="nn">var</span><span class="o">,</span><span class="nn">conexion</span>
+<span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">QtSql</span>
+
+
+<div class="viewcode-block" id="ventas"><a class="viewcode-back" href="../src/ventas.html#ventas.ventas">[documentos]</a><span class="k">class</span> <span class="nc">ventas</span><span class="p">():</span>
+<div class="viewcode-block" id="ventas.prepararventas"><a class="viewcode-back" href="../src/ventas.html#ventas.ventas.prepararventas">[documentos]</a>    <span class="k">def</span> <span class="nf">prepararventas</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cmbfacturar</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QComboBox</span><span class="p">()</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cmbfacturar</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">QFont</span><span class="p">(</span><span class="s1">&#39;Arial&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setRowCount</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">())</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setCellWidget</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">cmbfacturar</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">())</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">())</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cmbfacturar</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;select nombre,precio_unidad from articulos order by nombre&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+                <span class="k">while</span> <span class="n">query</span><span class="o">.</span><span class="n">next</span><span class="p">():</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">cmbfacturar</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error prepararventas: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ventas.abrirCalendarVentas"><a class="viewcode-back" href="../src/ventas.html#ventas.ventas.abrirCalendarVentas">[documentos]</a>    <span class="k">def</span> <span class="nf">abrirCalendarVentas</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">dlgcalendar</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">fecha</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ventas.crearFactura"><a class="viewcode-back" href="../src/ventas.html#ventas.ventas.crearFactura">[documentos]</a>    <span class="k">def</span> <span class="nf">crearFactura</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editFechaFactura</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editCodigoCliente</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editApellidosVentas</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">factura</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">datos</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editFechaFactura</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editCodigoCliente</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editApellidosVentas</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">datos</span><span class="p">:</span>
+                <span class="n">factura</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;insert into facturas (fecha,dni,apellidos) VALUES (:fecha,:dni,:apellidos)&#39;</span><span class="p">)</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">bindValue</span><span class="p">(</span><span class="s1">&#39;:fecha&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">factura</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">bindValue</span><span class="p">(</span><span class="s1">&#39;:dni&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">factura</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">bindValue</span><span class="p">(</span><span class="s1">&#39;:apellidos&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">factura</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+            <span class="n">ventas</span><span class="o">.</span><span class="n">mostrarFactura</span><span class="p">()</span>
+        <span class="n">ventas</span><span class="o">.</span><span class="n">prepararventas</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ventas.mostrarFactura"><a class="viewcode-back" href="../src/ventas.html#ventas.ventas.mostrarFactura">[documentos]</a>    <span class="k">def</span> <span class="nf">mostrarFactura</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;select codfact,fecha from facturas&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+                <span class="k">while</span> <span class="n">query</span><span class="o">.</span><span class="n">next</span><span class="p">():</span>
+                    <span class="n">cod</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">fecha</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturas</span><span class="o">.</span><span class="n">setRowCount</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturas</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cod</span><span class="p">)))</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturas</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">fecha</span><span class="p">))</span>
+                    <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error mostrarFactura: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ventas.limpiarFacturas"><a class="viewcode-back" href="../src/ventas.html#ventas.ventas.limpiarFacturas">[documentos]</a>    <span class="k">def</span> <span class="nf">limpiarFacturas</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editFechaFactura</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editCodigoCliente</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editApellidosVentas</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoFactura</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">ventas</span><span class="o">.</span><span class="n">mostrarFactura</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error limpiarFactura: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ventas.cargarFactura"><a class="viewcode-back" href="../src/ventas.html#ventas.ventas.cargarFactura">[documentos]</a>    <span class="k">def</span> <span class="nf">cargarFactura</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">fila</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturas</span><span class="o">.</span><span class="n">selectedItems</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">fila</span><span class="p">:</span>
+                <span class="n">fila</span> <span class="o">=</span> <span class="p">[</span><span class="n">dato</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">dato</span> <span class="ow">in</span> <span class="n">fila</span><span class="p">]</span>
+            <span class="n">cod</span> <span class="o">=</span> <span class="n">fila</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoFactura</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cod</span><span class="p">))</span>
+            <span class="n">fecha</span> <span class="o">=</span> <span class="n">fila</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;select dni,apellidos from facturas where codfact=:codfact&#39;</span><span class="p">)</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">bindValue</span><span class="p">(</span><span class="s1">&#39;:codfact&#39;</span><span class="p">,</span> <span class="n">cod</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+                <span class="k">while</span> <span class="n">query</span><span class="o">.</span><span class="n">next</span><span class="p">():</span>
+                    <span class="n">dni</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">apellidos</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editFechaFactura</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">fecha</span><span class="p">)</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editCodigoCliente</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editApellidosVentas</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">apellidos</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error cargarFactura: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ventas.borrarFactura"><a class="viewcode-back" href="../src/ventas.html#ventas.ventas.borrarFactura">[documentos]</a>    <span class="k">def</span> <span class="nf">borrarFactura</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoFactura</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">cod</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoFactura</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+                <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
+                <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;delete from facturas where codfact=:codigo&#39;</span><span class="p">)</span>
+                <span class="n">query</span><span class="o">.</span><span class="n">bindValue</span><span class="p">(</span><span class="s1">&#39;:codigo&#39;</span><span class="p">,</span> <span class="n">cod</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblstatus</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;Fatura borrada&#39;</span><span class="p">)</span>
+                    <span class="n">ventas</span><span class="o">.</span><span class="n">mostrarFactura</span><span class="p">()</span>
+                    <span class="n">ventas</span><span class="o">.</span><span class="n">limpiarFacturas</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error borrarFactura: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ventas.altasFacturacion"><a class="viewcode-back" href="../src/ventas.html#ventas.ventas.altasFacturacion">[documentos]</a>    <span class="k">def</span> <span class="nf">altasFacturacion</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">subfac</span> <span class="o">=</span> <span class="mf">0.00</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">venta</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">codfac</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoFactura</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">codfac</span><span class="p">))</span>
+            <span class="n">articulo</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">cmbfacturar</span><span class="o">.</span><span class="n">currentText</span><span class="p">()</span>
+            <span class="n">dato</span> <span class="o">=</span> <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">obtenCodPrec</span><span class="p">(</span><span class="n">articulo</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">dato</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">articulo</span><span class="p">)</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">currentRow</span><span class="p">()</span>
+            <span class="n">cantidad</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">cantidad</span> <span class="o">=</span> <span class="n">cantidad</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">cantidad</span><span class="p">))</span>
+            <span class="n">precio</span> <span class="o">=</span> <span class="n">dato</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">precio</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+            <span class="n">subtotal</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">cantidad</span><span class="p">)</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">dato</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subtotal</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+            <span class="c1"># sleep(1)</span>
+            <span class="k">if</span> <span class="n">codfac</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">articulo</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">cantidad</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">altaVenta</span><span class="p">()</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">subfac</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">subtotal</span><span class="p">)</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">subfac</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblSubtotal</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">subfac</span><span class="p">))</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">iva</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">subfac</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.21</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblIVA</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">iva</span><span class="p">))</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">fac</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">iva</span><span class="p">)</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">subfac</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblTotal</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">fac</span><span class="p">))</span>
+                <span class="n">ventas</span><span class="o">.</span><span class="n">mostrarVentasfac</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblstatus</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;Faltan Datos de la Factura&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error altasFacturacion: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ventas.mostrarVentasfac"><a class="viewcode-back" href="../src/ventas.html#ventas.ventas.mostrarVentasfac">[documentos]</a>    <span class="k">def</span> <span class="nf">mostrarVentasfac</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cmbfacturar</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QComboBox</span><span class="p">()</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargarCmbventa</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">cmbfacturar</span><span class="p">)</span>
+            <span class="n">codfac</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoFactura</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">listadoVentasfac</span><span class="p">(</span><span class="n">codfac</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error mostrarVentasfac: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ventas.altaVentas"><a class="viewcode-back" href="../src/ventas.html#ventas.ventas.altaVentas">[documentos]</a>    <span class="k">def</span> <span class="nf">altaVentas</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span>
+                <span class="s1">&#39;insert into ventas (codfacventa, codarticventa, cantidad, precio) VALUES (:codfacventa, :codarticventa,&#39;</span>
+                <span class="s1">&#39; :cantidad, :precio )&#39;</span><span class="p">)</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">bindValue</span><span class="p">(</span><span class="s1">&#39;:codfacventa&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">bindValue</span><span class="p">(</span><span class="s1">&#39;:codarticventa&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">bindValue</span><span class="p">(</span><span class="s1">&#39;:cantidad&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">bindValue</span><span class="p">(</span><span class="s1">&#39;:precio&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">currentRow</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblstatus</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;Venta Realizada&#39;</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="p">[</span><span class="mi">3</span><span class="p">])))</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="p">[</span><span class="mi">4</span><span class="p">])))</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">venta</span><span class="p">[</span><span class="mi">5</span><span class="p">])))</span>
+                <span class="n">row</span> <span class="o">=</span> <span class="n">row</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">insertRow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setCellWidget</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">cmbfacturar</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">scrollToBottom</span><span class="p">()</span>
+                <span class="n">ventas</span><span class="o">.</span><span class="n">cargarCmbVenta</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">cmbfacturar</span><span class="p">)</span>
+                <span class="n">ventas</span><span class="o">.</span><span class="n">mostrarVentasfac</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error altaVentas: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ventas.mostrarFacturacion"><a class="viewcode-back" href="../src/ventas.html#ventas.ventas.mostrarFacturacion">[documentos]</a>    <span class="k">def</span> <span class="nf">mostrarFacturacion</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;select codventa,codarticventa, cantidad, precio from ventas&#39;</span><span class="p">)</span>
+            <span class="n">query2</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
+            <span class="n">query2</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;select nombre from articulos where codigo=:codigo&#39;</span><span class="p">)</span>
+
+            <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+                <span class="k">while</span> <span class="n">query</span><span class="o">.</span><span class="n">next</span><span class="p">():</span>
+                    <span class="n">query2</span><span class="o">.</span><span class="n">bindValue</span><span class="p">(</span><span class="s1">&#39;:codigo&#39;</span><span class="p">,</span> <span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="n">query2</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+                        <span class="k">while</span> <span class="n">query2</span><span class="o">.</span><span class="n">next</span><span class="p">():</span>
+                            <span class="n">codArtc</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaCli</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">codve</span><span class="p">))</span>
+                    <span class="n">codve</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">cantidad</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                    <span class="n">precio</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaCli</span><span class="o">.</span><span class="n">setRowCount</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># crea la fila y a continuación mete los datos</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaCli</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">codve</span><span class="p">))</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaCli</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">cantidad</span><span class="p">))</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaCli</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">precio</span><span class="p">))</span>
+                    <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error mostrarFacturacion: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ventas.anularVenta"><a class="viewcode-back" href="../src/ventas.html#ventas.ventas.anularVenta">[documentos]</a>    <span class="k">def</span> <span class="nf">anularVenta</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">fila</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">selectedItems</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">fila</span><span class="p">:</span>
+                <span class="n">fila</span> <span class="o">=</span> <span class="p">[</span><span class="n">dato</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">dato</span> <span class="ow">in</span> <span class="n">fila</span><span class="p">]</span>
+            <span class="n">codventa</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fila</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">anulaVenta</span><span class="p">(</span><span class="n">codventa</span><span class="p">)</span>
+            <span class="n">ventas</span><span class="o">.</span><span class="n">mostrarVentasfac</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error anularVenta: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">a19albertopp</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Código de módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Alberto Portas Perez.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

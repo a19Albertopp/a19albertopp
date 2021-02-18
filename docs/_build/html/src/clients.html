@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>clients module &#8212; documentación de a19albertopp - v0.5.2</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-clients">
+<span id="clients-module"></span><h1>clients module<a class="headerlink" href="#module-clients" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="py class">
+<dt id="clients.Clients">
+<em class="property">class </em><code class="sig-prename descclassname">clients.</code><code class="sig-name descname">Clients</code><a class="reference internal" href="../_modules/clients.html#Clients"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="clients.Clients.AltaClientes">
+<code class="sig-name descname">AltaClientes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clients.AltaClientes"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients.AltaClientes" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>MODULO QUE CARGA LOS DATOS DEL CLIENTE</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> – None</p></li>
+<li><p><strong>b</strong> – None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Se crea una lista que contendra todos los datos del cliente que se introduzcan en los widgets,
+esta lista se pasa como argumento al modulo altaCli del modulo conexion.
+El modulo llama a la funcion mostrarClientes que recarga la tabla con todos los clientes además del nuevo.
+El módulo llama a la funcion limpiarCli que vacía el contenido de los widgets</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clients.CargarFecha">
+<code class="sig-name descname">CargarFecha</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clients.CargarFecha"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients.CargarFecha" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que carga la fercha marcada en el widgetCalendar</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>a</strong> – Librería Python para formateo de fechas</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>formato de fechas Python</p>
+</dd>
+</dl>
+<p>A partir de los eventos calendar.clicked.connect al clickear en una fecha, captura y la carga en el widget edit</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clients.abrirCalendar">
+<code class="sig-name descname">abrirCalendar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clients.abrirCalendar"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients.abrirCalendar" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Modulo que abre la ventana del calendario</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clients.bajaCliente">
+<code class="sig-name descname">bajaCliente</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clients.bajaCliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients.bajaCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que da de baja un cliente a partir del dni. Además recarga los datos del widget tablaCli con los datos actualizados desde la base de datos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Toma el dni cargado en el widget editDni se lo pasa al módulo bajaCli en la clase conexión y da de baja el cliente.
+Limpia los datos del formulario y recarga la tabla tablaCli</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clients.buscarCli">
+<code class="sig-name descname">buscarCli</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clients.buscarCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients.buscarCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Busca un cliente a partir de un dni que escribe el usuario</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Toma el dni del widget editDni y llama a la función buscarCli de la clase Conexión a a que pasa el dni</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clients.cargarCli">
+<code class="sig-name descname">cargarCli</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clients.cargarCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients.cargarCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que se activa con el evento clicked.connect y setSelectionBehaviour del widget TablaCli</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Al generarse el evento se  llama al módulo de Conexión cargarCliente, que devuelve los datos del cliente seleccionado
+haciendo una llamada a la base de datos</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clients.limpiarCli">
+<code class="sig-name descname">limpiarCli</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clients.limpiarCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients.limpiarCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>limpia los datos del formulario cliente</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clients.modifCliente">
+<code class="sig-name descname">modifCliente</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clients.modifCliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients.modifCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Modulo para modificar los datos del clietne con un determinado código</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>A partir del código del cliente, lee los datos de los widgets que se han cargado y modificado,
+llama al módulo modifCli de la clase conexión para actualizar los datos en la BBDD pas,andole una lista con los nuevos datos.
+Vuelve a mostrar la tablaCli actualizada pero no limpia datos de los widget.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clients.reloadCli">
+<code class="sig-name descname">reloadCli</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clients.reloadCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients.reloadCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Limpia datos del formulario y recarga la tabla de clientes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clients.selPago">
+<code class="sig-name descname">selPago</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clients.selPago"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients.selPago" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Checkea que valores de pago selecciona en el checkBox y los añade a una variable lista var.py</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+<p>En QtDSesigner se debe agrupar los checkBox en un ButtonGroup</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clients.selProv">
+<code class="sig-name descname">selProv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clients.selProv"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients.selProv" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Al seleccionar una provincia en el combo de provincias llama al evento activated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>a</strong> (<em>string</em>) – provincia seleccionada</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clients.selSexo">
+<code class="sig-name descname">selSexo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clients.selSexo"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients.selSexo" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que según checkeemos el rbt Fem o Masc, carga el texto correspondiente de Mujer o Hombre
+a la variable var.sex que luego se añade a la lista de los datos del cliente a incluír en la base de datos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="clients.Clients.validarDni">
+<code class="sig-name descname">validarDni</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clients.html#Clients.validarDni"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#clients.Clients.validarDni" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que valida la letra de un dni segñun sea nacional o extranjero</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>a</strong> – dni formato texto</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p>Pone la letra en mayúsculas, comprueba que son nueve carácteres. Toma los 8 primeros, si es extranjero cambia la letra por un número,
+y aplica el algoritmo de comprobación de la letra basado en la normativa.
+Si es correcto devuelve True, si es falso devuelve False</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">a19albertopp</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Alberto Portas Perez.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/src/clients.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

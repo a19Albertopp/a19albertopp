@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>events module &#8212; documentación de a19albertopp - v0.5.2</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-events">
+<span id="events-module"></span><h1>events module<a class="headerlink" href="#module-events" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="py class">
+<dt id="events.Eventos">
+<em class="property">class </em><code class="sig-prename descclassname">events.</code><code class="sig-name descname">Eventos</code><a class="reference internal" href="../_modules/events.html#Eventos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>EVENTOS GENERALES</p>
+<dl class="py method">
+<dt id="events.Eventos.AbrirAviso">
+<code class="sig-name descname">AbrirAviso</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.AbrirAviso"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.AbrirAviso" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que abre una ventana de aviso</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>mensaje</strong> (<em>string</em>) – mensaje que muestra la ventana</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>True/False</p>
+</dd>
+</dl>
+<p>Abre una ventada de aviso con el mensaje pasado por parámetro. Devuelve un booleano dependiendo de si se ejecuta
+o no.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="events.Eventos.AbrirDir">
+<code class="sig-name descname">AbrirDir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.AbrirDir"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.AbrirDir" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que abre una ventana para elegir directorio</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="events.Eventos.AbrirImprimir">
+<code class="sig-name descname">AbrirImprimir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.AbrirImprimir"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.AbrirImprimir" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que abre la ventana de impresión</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="events.Eventos.Backup">
+<code class="sig-name descname">Backup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.Backup"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.Backup" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que realiza una copia de seguridad de la base de datos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Abre una ventana para elegir el directorio donde guardar la copia. Comprime el archivo de la base de datos
+en un archivo zip. Muestra un mensaje en la barra de estado.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="events.Eventos.Salir">
+<code class="sig-name descname">Salir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.Salir"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.Salir" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Método que cierra el programa</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>event</em>) – evento salir</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Abre la ventana salir y cierra el programa si se clicka el botón aceptar</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="events.Eventos.cargarProv">
+<code class="sig-name descname">cargarProv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.cargarProv"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.cargarProv" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>CARGA LAS PROVIENCIAS AL INICIAR EL PROGRAMA</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="events.Eventos.closeAviso">
+<code class="sig-name descname">closeAviso</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.closeAviso"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.closeAviso" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Modulo que cierra la ventana de aviso</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>a</strong> – Evento de ventana</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="events.Eventos.closeSalir">
+<code class="sig-name descname">closeSalir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.closeSalir"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.closeSalir" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que cierra la ventana salir</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="events.Eventos.validarAviso">
+<code class="sig-name descname">validarAviso</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.validarAviso"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.validarAviso" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Modulo que valida la ventana de aviso</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="events.Eventos.validoDNI">
+<code class="sig-name descname">validoDNI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/events.html#Eventos.validoDNI"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#events.Eventos.validoDNI" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que según sea correcto el dni, muestra una imagen distinta</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Si es falso escribe en el label una X roja, y si es verdadero escribe una V verde</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">a19albertopp</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Alberto Portas Perez.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/src/events.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

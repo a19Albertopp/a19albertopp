@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>events &#8212; documentación de a19albertopp - v0.5.2</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para events</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+
+<span class="kn">import</span> <span class="nn">var</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">clients</span>
+<span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+
+<div class="viewcode-block" id="Eventos"><a class="viewcode-back" href="../src/events.html#events.Eventos">[documentos]</a><span class="k">class</span> <span class="nc">Eventos</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;EVENTOS GENERALES&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Eventos.Salir"><a class="viewcode-back" href="../src/events.html#events.Eventos.Salir">[documentos]</a>    <span class="k">def</span> <span class="nf">Salir</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Método que cierra el programa</span>
+
+<span class="sd">        :param event: evento salir</span>
+<span class="sd">        :type event: event</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        Abre la ventana salir y cierra el programa si se clicka el botón aceptar</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">lblMenSalir</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;Salir de Xestion&quot;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">dlgsalir</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">dlgsalir</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">dlgsalir</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+                <span class="n">event</span><span class="o">.</span><span class="n">ignore</span><span class="p">()</span>
+
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error salir: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            EVENTOS CLIENTES</span>
+<span class="sd">            &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="Eventos.closeSalir"><a class="viewcode-back" href="../src/events.html#events.Eventos.closeSalir">[documentos]</a>    <span class="k">def</span> <span class="nf">closeSalir</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que cierra la ventana salir</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">dlgsalir</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">dlgsalir</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">dlgsalir</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error closesalir: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Eventos.validoDNI"><a class="viewcode-back" href="../src/events.html#events.Eventos.validoDNI">[documentos]</a>    <span class="k">def</span> <span class="nf">validoDNI</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que según sea correcto el dni, muestra una imagen distinta</span>
+
+<span class="sd">        :return: None</span>
+
+<span class="sd">        Si es falso escribe en el label una X roja, y si es verdadero escribe una V verde</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dni</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">validarDni</span><span class="p">(</span><span class="n">dni</span><span class="p">):</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblValido</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s1">&#39;QLabel {color: green;}&#39;</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblValido</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;V&#39;</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">dni</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblValido</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s1">&#39;QLabel {color: red;}&#39;</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblValido</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">dni</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+                <span class="c1"># clients.Clients.limpiarCli()</span>
+
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error módulo escribir valido DNI&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Eventos.cargarProv"><a class="viewcode-back" href="../src/events.html#events.Eventos.cargarProv">[documentos]</a>    <span class="k">def</span> <span class="nf">cargarProv</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        CARGA LAS PROVIENCIAS AL INICIAR EL PROGRAMA</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">prov</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;A Coruña&#39;</span><span class="p">,</span> <span class="s1">&#39;Ourense&#39;</span><span class="p">,</span> <span class="s1">&#39;Pontevedra&#39;</span><span class="p">,</span> <span class="s1">&#39;Lugo&#39;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">prov</span><span class="p">:</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">cmbProvincia</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Eventos.Backup"><a class="viewcode-back" href="../src/events.html#events.Eventos.Backup">[documentos]</a>    <span class="k">def</span> <span class="nf">Backup</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que realiza una copia de seguridad de la base de datos</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        Abre una ventana para elegir el directorio donde guardar la copia. Comprime el archivo de la base de datos</span>
+<span class="sd">        en un archivo zip. Muestra un mensaje en la barra de estado.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">fecha</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+            <span class="n">fecha</span> <span class="o">=</span> <span class="n">fecha</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y.%m.</span><span class="si">%d</span><span class="s1">.%H.%M.%S&#39;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">copia</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fecha</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_backup.zip&#39;</span><span class="p">)</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+            <span class="n">directorio</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">filedlgabrir</span><span class="o">.</span><span class="n">getSaveFileName</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;Guardar Copia&#39;</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">copia</span><span class="p">,</span> <span class="s1">&#39;.zip&#39;</span><span class="p">,</span>
+                                                                    <span class="n">options</span><span class="o">=</span><span class="n">option</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">filedlgabrir</span><span class="o">.</span><span class="n">Accepted</span> <span class="ow">and</span> <span class="n">filename</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">fichzip</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">copia</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+                <span class="n">fichzip</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">filebd</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">filebd</span><span class="p">),</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZIP_DEFLATED</span><span class="p">)</span>
+                <span class="n">fichzip</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblstatus</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;COPIA DE SEGURIDAD DE BASE DE DATOS CREADA&#39;</span><span class="p">)</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">copia</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">directorio</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Eventos.AbrirDir"><a class="viewcode-back" href="../src/events.html#events.Eventos.AbrirDir">[documentos]</a>    <span class="k">def</span> <span class="nf">AbrirDir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que abre una ventana para elegir directorio</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">filedlgabrir</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Eventos.AbrirAviso"><a class="viewcode-back" href="../src/events.html#events.Eventos.AbrirAviso">[documentos]</a>    <span class="k">def</span> <span class="nf">AbrirAviso</span><span class="p">(</span><span class="n">mensaje</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que abre una ventana de aviso</span>
+
+<span class="sd">        :param mensaje: mensaje que muestra la ventana</span>
+<span class="sd">        :type mensaje: string</span>
+<span class="sd">        :return: bool</span>
+<span class="sd">        :rtype: True/False</span>
+
+<span class="sd">        Abre una ventada de aviso con el mensaje pasado por parámetro. Devuelve un booleano dependiendo de si se ejecuta</span>
+<span class="sd">        o no.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">lblAvisoSalir</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">salir</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error Abrir Aviso: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Eventos.AbrirImprimir"><a class="viewcode-back" href="../src/events.html#events.Eventos.AbrirImprimir">[documentos]</a>    <span class="k">def</span> <span class="nf">AbrirImprimir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Módulo que abre la ventana de impresión</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">filedlimprimir</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error Abrir Imprimir: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Eventos.closeAviso"><a class="viewcode-back" href="../src/events.html#events.Eventos.closeAviso">[documentos]</a>    <span class="k">def</span> <span class="nf">closeAviso</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que cierra la ventana de aviso</span>
+
+<span class="sd">        :param a: Evento de ventana</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">validar</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error closeaviso: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Eventos.validarAviso"><a class="viewcode-back" href="../src/events.html#events.Eventos.validarAviso">[documentos]</a>    <span class="k">def</span> <span class="nf">validarAviso</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que valida la ventana de aviso</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">validar</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">a19albertopp</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Código de módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Alberto Portas Perez.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

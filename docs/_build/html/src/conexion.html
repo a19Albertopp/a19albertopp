@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>conexion module &#8212; documentación de a19albertopp - v0.5.2</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-conexion">
+<span id="conexion-module"></span><h1>conexion module<a class="headerlink" href="#module-conexion" title="Enlazar permanentemente con este título">¶</a></h1>
+<dl class="py class">
+<dt id="conexion.Conexion">
+<em class="property">class </em><code class="sig-prename descclassname">conexion.</code><code class="sig-name descname">Conexion</code><a class="reference internal" href="../_modules/conexion.html#Conexion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="conexion.Conexion.altaCli">
+<code class="sig-name descname">altaCli</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que da de alta un cliente con los datos pasados por lista. Muestra mensaje de resultado en la statusbar.
+Rescarga la tablaCli</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>cliente</strong> (<em>lista</em>) – datos del cliente</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.altaPro">
+<code class="sig-name descname">altaPro</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaPro"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaPro" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que da de alta un producto.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>producto</strong> (<em>lista</em>) – datos del producto</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Muestra mensaje de resultado en la statusbar.
+Rescarga la tablaPro</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.altaVenta">
+<code class="sig-name descname">altaVenta</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaVenta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.anulaVenta">
+<code class="sig-name descname">anulaVenta</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.anulaVenta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.anulaVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.bajaCli">
+<code class="sig-name descname">bajaCli</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.bajaCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.bajaCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que da de baja a un cliente.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>dni</strong> (<em>string</em>) – dni del cliente</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Da de baja a un cliente con el dni pasado. Muestra los datos pasados. Muestra un mensaje en la barra de estado.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.bajaPro">
+<code class="sig-name descname">bajaPro</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.bajaPro"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.bajaPro" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.buscaCli">
+<code class="sig-name descname">buscaCli</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.buscaCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.buscaCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que busca cliente y carga sus datos en la pantalla cliente.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>dni</strong> (<em>string</em>) – dni del cliente a buscar</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Busca en la base de datos el cliente con ese dni y carga los datos en los widgets, si existe.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.cargarCliente">
+<code class="sig-name descname">cargarCliente</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarCliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Carga los datos de un cliente cuando se clicka en la tabla</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.cargarCmbventa">
+<code class="sig-name descname">cargarCmbventa</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarCmbventa"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarCmbventa" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.cargarProducto">
+<code class="sig-name descname">cargarProducto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.db_connect">
+<code class="sig-name descname">db_connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.db_connect"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.db_connect" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que realiza la conexion de la aplicacion con la bd</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – nombre de la base de datos</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>True/False</p>
+</dd>
+</dl>
+<p>Utiliza la libreria de QtSql y el gestor de la BBDD es SqLite. En caso de error muestra pantalla de aviso</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.listadoVentasfac">
+<code class="sig-name descname">listadoVentasfac</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.listadoVentasfac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.listadoVentasfac" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.modifCli">
+<code class="sig-name descname">modifCli</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">newdata</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.modifCli"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.modifCli" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Modulo que modifica los datos del cliente</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>codigo</strong> (<em>string</em>) – codigo del cliente</p></li>
+<li><p><strong>newdata</strong> (<em>lista</em>) – datos actualizados</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Se actualizan los datos pasados en la lista del cliente con el codigo dado. En realidad coge todos los datos que
+hay en los widgets. Muestra mensaje en la barra de estado.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.modifProducto">
+<code class="sig-name descname">modifProducto</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">newdata</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.modifProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.modifProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.mostrarClientes">
+<code class="sig-name descname">mostrarClientes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.mostrarClientes"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.mostrarClientes" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Carga los clientes de la base de datos en la tablaCli</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.mostrarProductos">
+<code class="sig-name descname">mostrarProductos</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.mostrarProductos"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.mostrarProductos" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Módulo que carga los productos en la tablaPro</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.obtenCodPrec">
+<code class="sig-name descname">obtenCodPrec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.obtenCodPrec"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.obtenCodPrec" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">a19albertopp</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Alberto Portas Perez.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/src/conexion.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

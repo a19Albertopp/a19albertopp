@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>main &#8212; documentación de a19albertopp - v0.5.2</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para main</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtPrintSupport</span><span class="p">,</span><span class="n">QtSql</span>
+
+<span class="kn">from</span> <span class="nn">ventana</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">vensalir</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">vencalendar</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">venaviso</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">ventanaAbout</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">var</span><span class="o">,</span> <span class="nn">events</span><span class="o">,</span><span class="nn">clients</span><span class="o">,</span><span class="nn">conexion</span><span class="o">,</span><span class="nn">productos</span><span class="o">,</span><span class="nn">printer</span><span class="o">,</span><span class="nn">ventas</span>
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../src/main.html#main.main">[documentos]</a><span class="k">class</span> <span class="nc">main</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMainWindow</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">main</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">=</span><span class="n">Ui_VenPrincipal</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgsalir</span><span class="o">=</span><span class="n">DialogSalir</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgcalendar</span><span class="o">=</span><span class="n">DialogCalendar</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">filedlgabrir</span> <span class="o">=</span> <span class="n">FileDialogAbrir</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">filedlimprimir</span><span class="o">=</span><span class="n">PrintDialogAbrir</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">=</span><span class="n">DialogAviso</span><span class="p">()</span>
+        <span class="n">op</span><span class="o">=</span><span class="kc">False</span>
+        <span class="sd">&quot;&quot;&quot;BOTONES&quot;&quot;&quot;</span>
+        <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;var.ui.butAceptar.clicked.connect(events.Eventos.Saludo)&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;---------------PRODUCTOS--------------&quot;&quot;&quot;</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnSalirPro</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">Salir</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnAltaPro</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">productos</span><span class="o">.</span><span class="n">Productos</span><span class="o">.</span><span class="n">AltaProductos</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnBajaPro</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">productos</span><span class="o">.</span><span class="n">Productos</span><span class="o">.</span><span class="n">bajaProducto</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnModifPro</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">productos</span><span class="o">.</span><span class="n">Productos</span><span class="o">.</span><span class="n">modifProducto</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnLimpiarPro</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">productos</span><span class="o">.</span><span class="n">Productos</span><span class="o">.</span><span class="n">limpiarPro</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaPro</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">productos</span><span class="o">.</span><span class="n">Productos</span><span class="o">.</span><span class="n">cargarPro</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaPro</span><span class="o">.</span><span class="n">setSelectionBehavior</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidget</span><span class="o">.</span><span class="n">SelectRows</span><span class="p">)</span>
+        <span class="c1">#var.ui.actionAbout.triggered.connect(events.Eventos.AvisoAbout)</span>
+
+
+
+
+        <span class="sd">&quot;&quot;&quot;--------------------------------------&quot;&quot;&quot;</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnFechaFactura</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">abrirCalendarVentas</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnReloadFact</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">limpiarFacturas</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnReloadFact</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">prepararventas</span><span class="p">)</span>
+
+        <span class="sd">&quot;&quot;&quot;--------------------------------------&quot;&quot;&quot;</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">actionInforme_Clientes</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">printer</span><span class="o">.</span><span class="n">Printer</span><span class="o">.</span><span class="n">reportCli</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">actionInforme_Productos</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">printer</span><span class="o">.</span><span class="n">Printer</span><span class="o">.</span><span class="n">reportProductos</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">actionSalir</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">Salir</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">actionAbrir</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">AbrirDir</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnSalir</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">Salir</span><span class="p">)</span>
+
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">validoDNI</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">toolbarSalir</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">Salir</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">toolbarArchivo</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">AbrirDir</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">ToolbarImprimir</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">AbrirImprimir</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">toolbarBackup</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">Backup</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">actionImprimir</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">AbrirImprimir</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">cmbProvincia</span><span class="o">.</span><span class="n">activated</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">selProv</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnCalendar</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">abrirCalendar</span><span class="p">)</span>
+
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaCli</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">cargarCli</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaCli</span><span class="o">.</span><span class="n">setSelectionBehavior</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidget</span><span class="o">.</span><span class="n">SelectRows</span><span class="p">)</span> <span class="c1">#coge toda la fila de tablaCli</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnAltaCli</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">AltaClientes</span><span class="p">)</span>
+
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnLimpiarCli</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">limpiarCli</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">rbtsex</span><span class="o">=</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">rbFemenino</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">rbMasculino</span><span class="p">)</span>
+
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnBajaCli</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">bajaCliente</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnModifCli</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">modifCliente</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnReloadCli</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">reloadCli</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnBuscarCli</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">buscarCli</span><span class="p">)</span>
+
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblFecha</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">/%m/%Y&quot;</span><span class="p">))</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">statusBar</span><span class="o">.</span><span class="n">addPermanentWidget</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblstatus</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#Agrega al status bar el lblstatus.</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">statusBar</span><span class="o">.</span><span class="n">addPermanentWidget</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblFecha</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#Agrega al status bar la fecha.</span>
+
+
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblstatus</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;Bienvenido a 2º DAM&quot;</span><span class="p">)</span>
+
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">var</span><span class="o">.</span><span class="n">rbtsex</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">selSexo</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">chkpago</span><span class="o">=</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">chkEfectivo</span><span class="p">,</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">chkTarjeta</span><span class="p">,</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">chkTransferencia</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">var</span><span class="o">.</span><span class="n">chkpago</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">selPago</span><span class="p">)</span>
+
+
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaCli</span><span class="o">.</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setSectionResizeMode</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHeaderView</span><span class="o">.</span><span class="n">Stretch</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaPro</span><span class="o">.</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setSectionResizeMode</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHeaderView</span><span class="o">.</span><span class="n">Stretch</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturas</span><span class="o">.</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setSectionResizeMode</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHeaderView</span><span class="o">.</span><span class="n">Stretch</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setSectionResizeMode</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHeaderView</span><span class="o">.</span><span class="n">Stretch</span><span class="p">)</span>
+
+        <span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">cargarProv</span><span class="p">()</span>
+
+        <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">db_connect</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">filebd</span><span class="p">)</span>
+        <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarClientes</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+        <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarProductos</span><span class="p">()</span>
+        <span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">prepararventas</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnFacturar</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">crearFactura</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnAnular</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">borrarFactura</span><span class="p">)</span>
+        <span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">mostrarFactura</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturas</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">cargarFactura</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturas</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">mostrarVentasfac</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnEliminarPro</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">anularVenta</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturas</span><span class="o">.</span><span class="n">setSelectionBehavior</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidget</span><span class="o">.</span><span class="n">SelectRows</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setSelectionBehavior</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidget</span><span class="o">.</span><span class="n">SelectRows</span><span class="p">)</span>
+        <span class="c1">#var.cmbfacturar.activated[str].connect(ventas.ventas.altasFacturacion)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">btnAdPro</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">altasFacturacion</span><span class="p">)</span>
+
+<div class="viewcode-block" id="main.closeEvent"><a class="viewcode-back" href="../src/main.html#main.main.closeEvent">[documentos]</a>    <span class="k">def</span> <span class="nf">closeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">event</span><span class="p">:</span>
+            <span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">Salir</span><span class="p">(</span><span class="n">event</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="DialogSalir"><a class="viewcode-back" href="../src/main.html#main.DialogSalir">[documentos]</a><span class="k">class</span> <span class="nc">DialogSalir</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QDialog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DialogSalir</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgsalir</span><span class="o">=</span><span class="n">Ui_venSalir</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgsalir</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgsalir</span><span class="o">.</span><span class="n">btnBoxSalir</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QDialogButtonBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">)</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;SI&#39;</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgsalir</span><span class="o">.</span><span class="n">btnBoxSalir</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QDialogButtonBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">)</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">Salir</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgsalir</span><span class="o">.</span><span class="n">btnBoxSalir</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QDialogButtonBox</span><span class="o">.</span><span class="n">No</span><span class="p">)</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">closeSalir</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DialogAviso"><a class="viewcode-back" href="../src/main.html#main.DialogAviso">[documentos]</a><span class="k">class</span> <span class="nc">DialogAviso</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QDialog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DialogAviso</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">=</span><span class="n">Ui_venAviso</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">buttonBox</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QDialogButtonBox</span><span class="o">.</span><span class="n">Cancel</span><span class="p">)</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;NO&#39;</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">buttonBox</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QDialogButtonBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">)</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;SI&#39;</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">buttonBox</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QDialogButtonBox</span><span class="o">.</span><span class="n">Cancel</span><span class="p">)</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">closeAviso</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">buttonBox</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QDialogButtonBox</span><span class="o">.</span><span class="n">Yes</span><span class="p">)</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">validarAviso</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">lblAvisoSalir</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">lblAvisoSalir</span></div>
+
+<div class="viewcode-block" id="DialogCalendar"><a class="viewcode-back" href="../src/main.html#main.DialogCalendar">[documentos]</a><span class="k">class</span> <span class="nc">DialogCalendar</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QDialog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DialogCalendar</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgcalendar</span><span class="o">=</span><span class="n">Ui_dlgCalendar</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgcalendar</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">diaactual</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">day</span>
+        <span class="n">mesactual</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">month</span>
+        <span class="n">anoactual</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">year</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgcalendar</span><span class="o">.</span><span class="n">Calendar</span><span class="o">.</span><span class="n">setSelectedDate</span><span class="p">((</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QDate</span><span class="p">(</span><span class="n">anoactual</span><span class="p">,</span><span class="n">mesactual</span><span class="p">,</span><span class="n">diaactual</span><span class="p">)))</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgcalendar</span><span class="o">.</span><span class="n">Calendar</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">CargarFecha</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgcalendar</span><span class="o">.</span><span class="n">Calendar</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FileDialogAbrir"><a class="viewcode-back" href="../src/main.html#main.FileDialogAbrir">[documentos]</a><span class="k">class</span> <span class="nc">FileDialogAbrir</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FileDialogAbrir</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="PrintDialogAbrir"><a class="viewcode-back" href="../src/main.html#main.PrintDialogAbrir">[documentos]</a><span class="k">class</span> <span class="nc">PrintDialogAbrir</span><span class="p">(</span><span class="n">QtPrintSupport</span><span class="o">.</span><span class="n">QPrintDialog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PrintDialogAbrir</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span></div>
+<div class="viewcode-block" id="DialogAbout"><a class="viewcode-back" href="../src/main.html#main.DialogAbout">[documentos]</a><span class="k">class</span> <span class="nc">DialogAbout</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QDialog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DialogAbout</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgabout</span> <span class="o">=</span> <span class="n">Ui_venAbout</span><span class="p">()</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgabout</span><span class="o">.</span><span class="n">setupUi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgabout</span><span class="o">.</span><span class="n">btnBoxCerrar</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QDialogButtonBox</span><span class="o">.</span><span class="n">Cancel</span><span class="p">)</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;Cerrar&#39;</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgabout</span><span class="o">.</span><span class="n">btnBoxCerrar</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QDialogButtonBox</span><span class="o">.</span><span class="n">Cancel</span><span class="p">)</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">cerrarAvisoAbout</span><span class="p">)</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">=</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="p">([])</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">main</span><span class="p">()</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">showMaximized</span><span class="p">()</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec</span><span class="p">())</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">a19albertopp</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Código de módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Alberto Portas Perez.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
