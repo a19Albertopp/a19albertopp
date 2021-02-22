@@ -72,13 +72,13 @@ class Clients():
         except Exception as error:
             print('Error: %s ' % str(error))
 
-    def abrirCalendar():
+
+    def abrirCalendar(self):
         """
 
         Modulo que abre la ventana del calendario
 
         """
-    def abrirCalendar(self):
         try:
             var.dlgcalendar.show()
             var.fecha=0

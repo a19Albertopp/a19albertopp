@@ -2,18 +2,19 @@ import var
 from PyQt5 import QtWidgets
 import conexion, events
 
+
 class Productos():
 
     def AltaProductos(self):
 
         try:
-            newpro = [] #contiene todos los datos
-            producto = [var.ui.editNombrePro,var.ui.editPrecioPro,var.ui.editStock]
+            newpro = []  # contiene todos los datos
+            producto = [var.ui.editNombrePro, var.ui.editPrecioPro, var.ui.editStock]
             for i in producto:
                 newpro.append(i.text())
             mensaje = ('Desea dar de alta el Producto?')
             events.Eventos.AbrirAviso(mensaje)
-            if var.validar==True:
+            if var.validar == True:
                 if newpro:
                     conexion.Conexion.altaPro(newpro)
                     Productos.limpiarPro(self)
@@ -36,41 +37,40 @@ class Productos():
         except Exception as error:
             print('Error cargar Productos: %s ' % str(error))
 
-
-
     def bajaProducto(self):
         try:
-            var.validar=False
-            codigo=var.ui.lblCodigoPro.text()
-            mensaje=('Desea eliminar el Producto?')
+            var.validar = False
+            codigo = var.ui.lblCodigoPro.text()
+            mensaje = ('Desea eliminar el Producto?')
 
-            if var.ui.lblCodigoPro.text()!='':
+            if var.ui.lblCodigoPro.text() != '':
                 events.Eventos.AbrirAviso(mensaje)
-            if var.validar==True:
+            if var.validar == True:
                 conexion.Conexion.bajaPro(codigo)
                 conexion.Conexion.mostrarProductos()
                 Productos.limpiarPro(self)
 
         except Exception as error:
-            print('Error bajar Productos: %s' %str(error))
+            print('Error bajar Productos: %s' % str(error))
 
     def modifProducto(self):
 
         try:
-            var.validar=False
-            newdata=[]
-            codigo=var.ui.lblCodigoPro.text()
-            producto=[var.ui.editNombrePro, var.ui.editPrecioPro,var.ui.editStock]
+            var.validar = False
+            newdata = []
+            codigo = var.ui.lblCodigoPro.text()
+            producto = [var.ui.editNombrePro, var.ui.editPrecioPro, var.ui.editStock]
             for i in producto:
                 newdata.append(i.text())
-            mensaje=('Seguro que desea Modificar el Producto?')
+            mensaje = ('Seguro que desea Modificar el Producto?')
             events.Eventos.AbrirAviso(mensaje)
-            if var.validar==True:
-                conexion.Conexion.modifProducto(codigo,newdata)
+            if var.validar == True:
+                conexion.Conexion.modifProducto(codigo, newdata)
                 conexion.Conexion.mostrarProductos()
                 Productos.limpiarPro(self)
         except Exception as error:
-            print('Error modifProducto: %s' %str(error))
+            print('Error modifProducto: %s' % str(error))
+
     def limpiarPro(self):
 
         try:

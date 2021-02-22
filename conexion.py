@@ -1,5 +1,8 @@
+import os
+import sys
+
 from PyQt5 import QtWidgets, QtSql, QtCore
-import var,ventas
+import var, ventas
 
 
 class Conexion():
@@ -18,7 +21,7 @@ class Conexion():
 
         """
         db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
-        db.setDatabaseName(filename)
+        db.setDatabaseName(Conexion.resource_path(filename))
         if not db.open():
             QtWidgets.QMessageBox.critical(None, 'No se puede abrir la base de datos',
                                            'No se puede establecer conexion.\n' 'Haz Click para Cancelar.',
@@ -26,7 +29,22 @@ class Conexion():
             return False
         else:
             print('Conexión Establecida')
-        return True
+            return True
+
+    def resource_path(relative_path):
+        """
+
+        Obtiene el directorio de los recursos para hacer el onefile
+
+        :return: Ruta del recurso
+
+        """
+        try:
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
+
+        return os.path.join(base_path, relative_path)
 
     def altaCli(cliente):
         """
@@ -92,7 +110,8 @@ class Conexion():
         else:
             print("Error mostrar clientes: ", query.lastError().text())
 
-    def cargarCliente():
+
+    def cargarCliente(self):
         """
 
         Carga los datos de un cliente cuando se clicka en la tabla
@@ -101,7 +120,6 @@ class Conexion():
         :rtype: None
 
         """
-    def cargarCliente(self):
         dni = var.ui.editDni.text()
         query = QtSql.QSqlQuery()
         query.prepare('select * from clientes where dni = :dni;')
@@ -246,7 +264,7 @@ class Conexion():
         else:
             print("Error Alta Producto: ", query.lastError().text())
 
-    def mostrarProductos():
+    def mostrarProductos(self):
         """
 
         Módulo que carga los productos en la tablaPro
@@ -380,9 +398,9 @@ class Conexion():
                             var.ui.tablaFacturar.setItem(index, 1, QtWidgets.QTableWidgetItem(str(articulo)))
                             var.ui.tablaFacturar.setItem(index, 2, QtWidgets.QTableWidgetItem(str(cantidad)))
                             subtotal = round(float(cantidad) * float(precio), 2)
-                            var.ui.tablaFacturar.setItem(index, 3, QtWidgets.QTableWidgetItem(str(precio)+'€'))
-                            var.ui.tablaFacturar.setItem(index, 4, QtWidgets.QTableWidgetItem(str(subtotal)+'€'))
-                            var.ui.tablaFacturar.item(index,0).setTextAlignment(QtCore.Qt.AlignCenter)
+                            var.ui.tablaFacturar.setItem(index, 3, QtWidgets.QTableWidgetItem(str(precio) + '€'))
+                            var.ui.tablaFacturar.setItem(index, 4, QtWidgets.QTableWidgetItem(str(subtotal) + '€'))
+                            var.ui.tablaFacturar.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                     index += 1
                     var.subfac = round(float(subtotal) + float(var.subfac), 2)
                 # ventas.Ven tas.prepararTablaventas(index)

@@ -97,7 +97,7 @@ class main(QtWidgets.QMainWindow):
 
         conexion.Conexion.db_connect(var.filebd)
         conexion.Conexion.mostrarClientes(op)
-        conexion.Conexion.mostrarProductos()
+        conexion.Conexion.mostrarProductos(self)
         ventas.ventas.prepararventas(0)
         var.ui.btnFacturar.clicked.connect(ventas.ventas.crearFactura)
         var.ui.btnAnular.clicked.connect(ventas.ventas.borrarFactura)
@@ -110,6 +110,7 @@ class main(QtWidgets.QMainWindow):
         var.ui.btnAdPro.clicked.connect(ventas.ventas.altasFacturacion)
         var.ui.btnBuscarFac.clicked.connect(ventas.ventas.mostrarFactura)
         var.ui.actionInforme_Facturas.triggered.connect(printer.Printer.reportFac)
+        var.ui.actionInforme_Facturas_Cliente.triggered.connect(printer.Printer.reportFactCli)
     def closeEvent(self, event):
         if event:
             events.Eventos.Salir(event)

@@ -2,7 +2,7 @@ import os
 import shutil
 import zipfile
 
-import var,conexion,ventas
+import var, conexion, ventas
 import sys
 import clients
 from PyQt5 import QtWidgets
@@ -59,7 +59,8 @@ class Eventos():
         except Exception as error:
             print('Error closesalir: %s' % str(error))
 
-    def validoDNI():
+
+    def validoDNI(self):
         """
 
         Módulo que según sea correcto el dni, muestra una imagen distinta
@@ -68,11 +69,6 @@ class Eventos():
 
         Si es falso escribe en el label una X roja, y si es verdadero escribe una V verde
         """
-    def validoDNI(self):
-        '''
-               muestra mensaje de dni válido
-               :return: none.
-               '''
         try:
             dni = var.ui.editDni.text()
             if clients.Clients.validarDni(dni):
@@ -103,19 +99,18 @@ class Eventos():
         except Exception as error:
             print('Error: %s ' % str(error))
 
-    def Backup():
-        """
-
-        Módulo que realiza una copia de seguridad de la base de datos
-
-        :return: None
-        :rtype: None
-
-        Abre una ventana para elegir el directorio donde guardar la copia. Comprime el archivo de la base de datos
-        en un archivo zip. Muestra un mensaje en la barra de estado.
-
-        """
     def Backup(self):
+        """
+
+                Módulo que realiza una copia de seguridad de la base de datos
+
+                :return: None
+                :rtype: None
+
+                Abre una ventana para elegir el directorio donde guardar la copia. Comprime el archivo de la base de datos
+                en un archivo zip. Muestra un mensaje en la barra de estado.
+
+                """
         try:
             fecha = datetime.today()
             fecha = fecha.strftime('%Y.%m.%d.%H.%M.%S')
@@ -168,6 +163,7 @@ class Eventos():
                 var.dlgaviso.hide()
             else:
                 var.dlgaviso.hide()
+            return var.salir
         except Exception as error:
             print('Error Abrir Aviso: %s ' % str(error))
 
@@ -217,14 +213,21 @@ class Eventos():
         if var.dlgaviso.exec_():
             var.dlgaviso.hide()
 
-
     def restaurarBD(self):
+        """
+
+        Modulo que restaura la base de datos
+
+        :return: None
+
+        """
         try:
-            option=QtWidgets.QFileDialog.Options()
-            filename=var.filedlgabrir.getOpenFileName(None,'Restaurar Copia de Seguridade','','*.zip',options=option)
-            if var.filedlgabrir.Accepted and filename!='':
-                file=filename[0]
-                with zipfile.ZipFile(str(file),'r')as bbdd:
+            option = QtWidgets.QFileDialog.Options()
+            filename = var.filedlgabrir.getOpenFileName(None, 'Restaurar Copia de Seguridade', '', '*.zip',
+                                                        options=option)
+            if var.filedlgabrir.Accepted and filename != '':
+                file = filename[0]
+                with zipfile.ZipFile(str(file), 'r')as bbdd:
                     bbdd.extractall(pwd=None)
                 bbdd.close()
             clients.Clients.limpiarCli(self)
@@ -237,5 +240,3 @@ class Eventos():
 
         except Exception as error:
             print('Error restaurarBD: %s' % str(error))
-
-

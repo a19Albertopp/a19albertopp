@@ -3,13 +3,14 @@ from PyQt5 import QtSql
 import os, var
 from datetime import datetime
 from reportlab.lib.pagesizes import A4
+import conexion
 
 
 class Printer():
 
     def Cabecera(self):
 
-        logo = '.\\img\logo.png'
+        logo = conexion.Conexion.resource_path('img\logo.png')
         var.rep.drawImage(logo, 450, 752)
         var.rep.setTitle('INFORMES')
         var.rep.setAuthor('a19Albertopp')
@@ -60,12 +61,12 @@ class Printer():
         try:
             var.rep.setFont('Helvetica-Oblique', size=9)
             textlistado = 'FACTURAS DEL CLIENTE'
-            cli=['NOMBRE','DNI']
-            var.rep.drawString(45,730,cli[0])
-            var.rep.drawString(60,715,cli[1])
+            cli = ['NOMBRE', 'DNI']
+            var.rep.drawString(45, 730, cli[0])
+            var.rep.drawString(60, 715, cli[1])
             var.rep.drawString(230, 700, textlistado)
             var.rep.line(45, 690, 525, 690)
-            itempro = [ 'Nº FACTURA', 'FECHA', 'TOTAL']
+            itempro = ['Nº FACTURA', 'FECHA', 'TOTAL']
             var.rep.drawString(45, 678, itempro[0])
             var.rep.drawString(250, 678, itempro[1])
             var.rep.drawString(400, 678, itempro[2])
@@ -74,11 +75,11 @@ class Printer():
             var.rep.drawString(100, 715, codcli)
             query = QtSql.QSqlQuery()
             query.prepare('select nombre from clientes where dni=:dni')
-            query.bindValue(':dni',codcli)
+            query.bindValue(':dni', codcli)
             if query.exec_():
                 while query.next():
-                    nombre=query.value(0)
-                    nombre=nombre+" "+var.ui.editApellidosVentas.text()
+                    nombre = query.value(0)
+                    nombre = nombre + " " + var.ui.editApellidosVentas.text()
                     var.rep.drawString(100, 730, nombre)
 
         except Exception as error:
@@ -104,9 +105,9 @@ class Printer():
 
     def reportFactCli(self):
         try:
-            precio_total=0
+            precio_total = 0
             textlistado = "LISTADO FACTURAS CLIENTES"
-            var.rep = canvas.Canvas('informes/listadofactcli.pdf')
+            var.rep = canvas.Canvas(conexion.Conexion.resource_path('informes/listadofactcli.pdf'))
             Printer.Cabecera(self)
             Printer.cabeceraFactCli(self)
             Printer.pie(textlistado)
@@ -114,7 +115,7 @@ class Printer():
             query.prepare('select codfact, fecha from facturas where dni=:dni')
             query.bindValue(':dni', var.ui.editCodigoCliente.text())
             var.rep.setFont('Helvetica', size=10)
-            var.rep.drawString(330,60,'TOTAL FACTURACION:')
+            var.rep.drawString(330, 60, 'TOTAL FACTURACION:')
             if query.exec_():
                 i = 50
                 j = 650
@@ -127,24 +128,24 @@ class Printer():
                         Printer.pie()
                         i = 50
                         j = 690
-                    precio=0
+                    precio = 0
                     var.rep.drawString(i, j, str(query.value(0)))
                     var.rep.drawString(i + 200, j, str(query.value(1)))
-                    query2=QtSql.QSqlQuery()
+                    query2 = QtSql.QSqlQuery()
                     query2.prepare('select cantidad,precio from ventas where codfactventa=:codfact')
-                    query2.bindValue(':codfact',str(query.value(0)))
+                    query2.bindValue(':codfact', str(query.value(0)))
                     if query2.exec_():
                         while query2.next():
-                            cantidad=query2.value(0)
-                            valor=query2.value(1)
-                            precio=float(valor)*int(cantidad)*1.21+precio
-                            precio=round(precio,2)
-                    var.rep.drawString(i + 350, j, str(precio)+'€')
-                    precio_total=precio_total+precio
-                    j-=25
-                var.rep.drawString(450,60,str(precio_total)+'€')
+                            cantidad = query2.value(0)
+                            valor = query2.value(1)
+                            precio = float(valor) * int(cantidad) * 1.21 + precio
+                            precio = round(precio, 2)
+                    var.rep.drawString(i + 350, j, str(precio) + '€')
+                    precio_total = precio_total + precio
+                    j -= 25
+                var.rep.drawString(450, 60, str(precio_total) + '€')
             var.rep.save()
-            rootPath = ".\\informes"
+            rootPath = conexion.Conexion.resource_path(".\\informes")
             cont = 0
             for file in os.listdir(rootPath):
                 if file.endswith('listadofactcli.pdf'):
@@ -156,7 +157,7 @@ class Printer():
     def reportCli(self):
         try:
             textlistado = 'LISTADO CLIENTES'
-            var.rep = canvas.Canvas('informes/listadoclientes.pdf')
+            var.rep = canvas.Canvas(conexion.Conexion.resource_path('informes/listadoclientes.pdf'))
             Printer.Cabecera(self)
             Printer.cabeceracli(self)
             Printer.pie(textlistado)
@@ -183,7 +184,7 @@ class Printer():
                     j -= 25
 
             var.rep.save()
-            rootPath = ".\\informes"
+            rootPath = conexion.Conexion.resource_path(".\\informes")
             cont = 0
             for file in os.listdir(rootPath):
                 if file.endswith('listadoclientes.pdf'):
@@ -196,7 +197,7 @@ class Printer():
     def reportProductos(self):
         try:
             textlistado = 'LISTADO DE PRODUCTOS'
-            var.rep = canvas.Canvas('informes/listadoproductos.pdf', pagesize=A4)
+            var.rep = canvas.Canvas(conexion.Conexion.resource_path('informes/listadoproductos.pdf'), pagesize=A4)
             Printer.Cabecera(self)
             Printer.pie(textlistado)
             Printer.cabeceraPro(self)
@@ -222,7 +223,7 @@ class Printer():
                     j -= 25
 
             var.rep.save()
-            rootPath = ".\\informes"
+            rootPath = conexion.Conexion.resource_path(".\\informes")
             cont = 0
             for file in os.listdir(rootPath):
                 if file.endswith('listadoproductos.pdf'):
@@ -257,7 +258,7 @@ class Printer():
                     var.rep.drawString(55, 695, str(query1.value(0)) + ', ' + str(query1.value(1)))
                     var.rep.drawString(300, 695, 'Formas de Pago: ')
                     var.rep.drawString(55, 680, str(query1.value(2)) + ' - ' + str(query1.value(3)))
-                    var.rep.drawString(300, 680, str(query1.value(4).strip('[]').replace('\'', '').replace(',',' -')))
+                    var.rep.drawString(300, 680, str(query1.value(4).strip('[]').replace('\'', '').replace(',', ' -')))
             var.rep.line(45, 620, 525, 620)
             var.rep.setFont('Helvetica-Bold', size=10)
             temven = ['CodVenta', 'Artículo', 'Cantidad', 'Precio-Unidad(€)', 'Subtotal(€)']
@@ -267,17 +268,18 @@ class Printer():
             var.rep.drawString(360, 626, temven[3])
             var.rep.drawString(470, 626, temven[4])
             var.rep.setFont('Helvetica-Bold', size=12)
-            var.rep.drawRightString(500, 160,'Subtotal:   ' + "{0:.2f}".format(float(var.ui.lblSubtotal.text())) + ' €')
+            var.rep.drawRightString(500, 160,
+                                    'Subtotal:   ' + "{0:.2f}".format(float(var.ui.lblSubtotal.text())) + ' €')
             var.rep.drawRightString(500, 140, 'IVA:     ' + "{0:.2f}".format(float(var.ui.lblIVA.text())) + ' €')
-            var.rep.drawRightString(500, 120,'Total Factura: ' + "{0:.2f}".format(float(var.ui.lblTotal.text())) + ' €')
+            var.rep.drawRightString(500, 120,
+                                    'Total Factura: ' + "{0:.2f}".format(float(var.ui.lblTotal.text())) + ' €')
         except Exception as error:
             print('Error cabecfac %s' % str(error))
-
 
     def reportFac(self):
         try:
             textlistado = 'FACTURA'
-            var.rep = canvas.Canvas('informes/factura.pdf', pagesize=A4)
+            var.rep = canvas.Canvas(conexion.Conexion.resource_path('informes/factura.pdf'), pagesize=A4)
             Printer.Cabecera(self)
             Printer.pie(textlistado)
             codfac = var.ui.lblCodigoFactura.text()
@@ -299,9 +301,9 @@ class Printer():
                         j = 600
                     var.rep.setFont('Helvetica', size=10)
                     var.rep.drawString(i, j, str(query.value(0)))
-                    query2=QtSql.QSqlQuery()
+                    query2 = QtSql.QSqlQuery()
                     query2.prepare('select nombre from articulos where codigo =:codarticventa')
-                    query2.bindValue(':codarticventa',str(query.value(1)))
+                    query2.bindValue(':codarticventa', str(query.value(1)))
                     if query2.exec_():
                         while query2.next():
                             var.rep.drawString(i + 85, j, str(query2.value(0)))
@@ -312,7 +314,7 @@ class Printer():
                     j = j - 20
 
             var.rep.save()
-            rootPath = ".\\informes"
+            rootPath = conexion.Conexion.resource_path(".\\informes")
             cont = 0
             for file in os.listdir(rootPath):
                 if file.endswith('factura.pdf'):
