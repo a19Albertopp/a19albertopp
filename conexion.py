@@ -36,7 +36,10 @@ class Conexion():
 
         Obtiene el directorio de los recursos para hacer el onefile
 
+        :param a: Ruta del archivo que queremos localizar
+        :type a: String
         :return: Ruta del recurso
+        :rtype: String
 
         """
         try:
@@ -83,6 +86,8 @@ class Conexion():
 
         Carga los clientes de la base de datos en la tablaCli
 
+        :param a: Boolean para realizar la busqueda de un cliente concreto o no
+        :type a: Boolean
         :return: None
         :rtype: None
 
@@ -293,6 +298,13 @@ class Conexion():
             print("Error mostrar Productos: ", query.lastError().text())
 
     def cargarProducto(self):
+        """
+
+        Modulo que carga los valores de los productos desde la bd a los edit de la ventana de productos
+
+        :return: None
+
+        """
         codigo = var.ui.lblCodigoPro.text()
         query = QtSql.QSqlQuery()
         query.prepare('select * from articulos where codigo = :codigo;')
@@ -304,6 +316,15 @@ class Conexion():
                 var.ui.editStock.setText(str(query.value(3)))
 
     def bajaPro(codigoPro):
+        """
+
+        Modulo que elemina un producto de la base de datos recibiendo el código del producto
+
+        :param a: Codigo del producto a eliminar
+        :type a: Integer
+        :return:
+
+        """
         query = QtSql.QSqlQuery()
         query.prepare(
             'delete from articulos where codigo=:codigoPro')  # Coge el texto del DNI y elimina al cliente con ese DNI
@@ -315,7 +336,17 @@ class Conexion():
             print('Error eliminar producto', query.lastError().text())
 
     def modifProducto(codigo, newdata):
+        """
 
+        Modulo que recibe el codigo de un producto y valores nuevos del mismo para realizar la actualizacion de esos valores en la base de datos
+
+        :param a: Codigo del producto a modificar
+        :type a: Integer
+        :param newdata: Valores nuevos a actualizar en el producto
+        :type newdata: Coleccion de Strings
+        :return: None
+
+        """
         query = QtSql.QSqlQuery()
         codigo = int(codigo)
         query.prepare('update articulos set nombre=:nombre, precio_unidad=:precio, stock=:stock where codigo=:codigo')
@@ -330,6 +361,16 @@ class Conexion():
             print("Error modificar Producto: ", query.lastError().text())
 
     def obtenCodPrec(articulo):
+        """
+
+        Modulo que a partir del nombre de un articulo, busca en la base de datos su codigo y precio por unidad
+
+        :param a: String nombre del articulo
+        :type a: String
+        :return: Codigo y precio unidad del producto
+        :rtype: Listra
+
+        """
         dato = []
         query = QtSql.QSqlQuery()
         query.prepare('select codigo, precio_unidad from articulos where nombre = :articulo')
@@ -340,6 +381,13 @@ class Conexion():
         return dato
 
     def altaVenta(self):
+        """
+
+        Modulo que inserta una venta en la base de datos y carga los datos de la venta en la tablaFacturar
+
+        :return: None
+
+        """
         query = QtSql.QSqlQuery()
         query.prepare(
             'insert into ventas (codfactventa, codarticventa, cantidad, precio) VALUES (:codfactventa, :codarticventa,'
@@ -364,6 +412,15 @@ class Conexion():
             print("Error alta venta: ", query.lastError().text())
 
     def cargarCmbventa(cmbfacturar):
+        """
+
+        Modulo que carga los nombres de los productos en el comboBox de la tabla Facturar que recibe
+
+        :param a: ComboBox de los nombres de los productos
+        :type a: ComboBox
+        :return: None
+
+        """
         var.cmbfacturar.clear()
         query = QtSql.QSqlQuery()
         var.cmbfacturar.addItem('')
@@ -373,6 +430,15 @@ class Conexion():
                 var.cmbfacturar.addItem(str(query.value(1)))
 
     def listadoVentasfac(codfac):
+        """
+
+        Modulo que recibe el codigo de la factura y carga los datos de esa factura en la tablaFacturar
+
+        :param a: Codigo de la factura
+        :type a: Integer
+        :return: None
+
+        """
 
         try:
             var.ui.tablaFacturar.clearContents()
@@ -419,6 +485,15 @@ class Conexion():
             print('Error listadoVentasfac: %s ' % str(error))
 
     def anulaVenta(codVenta):
+        """
+
+        Modulo que recibe el codigo de una venta y la elimina de la base de datos
+
+        :param a: Codigo de la venta a eliminar
+        :type a: Integer
+        :return: None
+
+        """
         query = QtSql.QSqlQuery()
         query.prepare('delete from ventas where codventa = :codVenta')
         query.bindValue(':codVenta', codVenta)

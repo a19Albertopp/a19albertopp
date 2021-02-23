@@ -48,7 +48,6 @@ class main(QtWidgets.QMainWindow):
         var.ui.actionInforme_Productos.triggered.connect(printer.Printer.reportProductos)
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.actionAbrir.triggered.connect(events.Eventos.AbrirDir)
-        var.ui.actionInforme_Facturas_Cliente.triggered.connect(printer.Printer.reportFactCli)
         var.ui.actionrestarurarBD.triggered.connect(events.Eventos.restaurarBD)
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir)
 

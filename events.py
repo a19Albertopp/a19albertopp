@@ -14,6 +14,7 @@ class Eventos():
 
     def Salir(event):
         """
+
         Método que cierra el programa
 
         :param event: evento salir
@@ -37,10 +38,6 @@ class Eventos():
 
         except Exception as error:
             print('Error salir: %s' % str(error))
-
-            """
-            EVENTOS CLIENTES
-            """
 
     def closeSalir(event):
         """
@@ -68,6 +65,7 @@ class Eventos():
         :return: None
 
         Si es falso escribe en el label una X roja, y si es verdadero escribe una V verde
+
         """
         try:
             dni = var.ui.editDni.text()
@@ -87,6 +85,7 @@ class Eventos():
 
     def cargarProv(self):
         """
+
         CARGA LAS PROVIENCIAS AL INICIAR EL PROGRAMA
 
         """
@@ -102,15 +101,15 @@ class Eventos():
     def Backup(self):
         """
 
-                Módulo que realiza una copia de seguridad de la base de datos
+        Módulo que realiza una copia de seguridad de la base de datos
 
-                :return: None
-                :rtype: None
+        :return: None
+        :rtype: None
 
-                Abre una ventana para elegir el directorio donde guardar la copia. Comprime el archivo de la base de datos
-                en un archivo zip. Muestra un mensaje en la barra de estado.
+        Abre una ventana para elegir el directorio donde guardar la copia. Comprime el archivo de la base de datos
+        en un archivo zip. Muestra un mensaje en la barra de estado.
 
-                """
+        """
         try:
             fecha = datetime.today()
             fecha = fecha.strftime('%Y.%m.%d.%H.%M.%S')
