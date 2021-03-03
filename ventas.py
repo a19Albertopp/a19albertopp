@@ -1,12 +1,20 @@
 from PyQt5.QtGui import QFont
 
-import var,conexion
+import var, conexion
 from PyQt5 import QtWidgets, QtSql
 
 
 class ventas():
     def prepararventas(index):
+        """
 
+        Modulo que prepara la tablaFacturar y le agrega el comboBox
+
+        :param index: Posicion inicial
+        :type index: Integer
+        :return: None
+
+        """
         try:
             var.cmbfacturar = QtWidgets.QComboBox()
             var.cmbfacturar.setFont(QFont('Arial', 8))
@@ -25,6 +33,13 @@ class ventas():
             print('Error prepararventas: %s ' % str(error))
 
     def abrirCalendarVentas(self):
+        """
+
+        Modulo que abre la ventana del calendario
+
+        :return: None
+
+        """
         try:
             var.dlgcalendar.show()
             var.fecha = 1
@@ -32,7 +47,14 @@ class ventas():
             print('Error: %s ' % str(error))
 
     def crearFactura(self):
-        if var.ui.editFechaFactura.text() != '' and var.ui.editCodigoCliente.text() != '' and var.ui.editApellidosVentas.text() != '' and var.ui.editFechaFactura.text() !='':
+        """
+
+        Modulo que recoge los datos de una factura de los edit y crea la factura en la BD
+
+        :return: None
+
+        """
+        if var.ui.editFechaFactura.text() != '' and var.ui.editCodigoCliente.text() != '' and var.ui.editApellidosVentas.text() != '' and var.ui.editFechaFactura.text() != '':
             factura = []
             datos = [var.ui.editFechaFactura, var.ui.editCodigoCliente, var.ui.editApellidosVentas]
             for i in datos:
@@ -47,16 +69,23 @@ class ventas():
             ventas.prepararventas(0)
 
     def mostrarFactura(self):
+        """
+
+        Modulo que muestra las facturas guardadas en la BD en la tablaFacturas
+
+        :return: None
+
+        """
         try:
             index = 0
-            cliente=var.ui.editCodigoCliente.text()
+            cliente = var.ui.editCodigoCliente.text()
             query = QtSql.QSqlQuery()
-            if cliente!='':
+            if cliente != '':
                 var.ui.tablaFacturas.clearContents()
                 query.prepare('select codfact,fecha from facturas where dni=:dni')
-                query.bindValue(':dni',cliente)
+                query.bindValue(':dni', cliente)
             else:
-               query.prepare('select codfact,fecha from facturas')
+                query.prepare('select codfact,fecha from facturas')
             var.ui.tablaFacturas.setRowCount(index)
             var.ui.tablaFacturas.setItem(index, 0, QtWidgets.QTableWidgetItem(""))
             var.ui.tablaFacturas.setItem(index, 1, QtWidgets.QTableWidgetItem(""))
@@ -73,6 +102,13 @@ class ventas():
             print('Error mostrarFactura: %s ' % str(error))
 
     def limpiarFacturas(self):
+        """
+
+        Modulo que limpia los edit de la ventana Facturacion
+
+        :return: None
+
+        """
         try:
             var.ui.editFechaFactura.setText('')
             var.ui.editCodigoCliente.setText('')
@@ -82,8 +118,14 @@ class ventas():
         except Exception as error:
             print('Error limpiarFactura: %s ' % str(error))
 
-
     def cargarFactura(self):
+        """
+
+        Modulo que carga los datos de una factura seleccionada de la tablaFacturas en los edit de la ventana de Facturacion
+
+        :return: None
+
+        """
         try:
             fila = var.ui.tablaFacturas.selectedItems()
             if fila:
@@ -105,6 +147,13 @@ class ventas():
             print('Error cargarFactura: %s ' % str(error))
 
     def borrarFactura(self):
+        """
+
+        Modulo que borra una factura de la BD
+
+        :return: None
+
+        """
         try:
             if var.ui.lblCodigoFactura.text() != '':
                 cod = var.ui.lblCodigoFactura.text()
@@ -120,6 +169,13 @@ class ventas():
             print('Error borrarFactura: %s ' % str(error))
 
     def altasFacturacion(self):
+        """
+
+        Modulo que da de alta una venta asociada a una factura en la tablaFacturar y llama al metodo altaVenta de la clase Conexion para darla de alta en la BD
+
+        :return: None
+
+        """
         try:
             var.subfac = 0.00
             var.venta = []
@@ -154,6 +210,13 @@ class ventas():
             print('Error altasFacturacion: %s ' % str(error))
 
     def mostrarVentasfac(self):
+        """
+
+        Modulo que llama a listadoVentasfac para cargar las ventas y a cargarCmbventa para cargar el comboBox de la tabla Facturar
+
+        :return: None
+
+        """
         try:
             var.cmbfacturar = QtWidgets.QComboBox()
             conexion.Conexion.cargarCmbventa(var.cmbfacturar)
@@ -164,6 +227,13 @@ class ventas():
             print('Error mostrarVentasfac: %s' % str(error))
 
     def altaVentas(self):
+        """
+
+        Modulo que da de alta una venta en la BD, y recarga la tablaFacturar
+
+        :return: None
+
+        """
         try:
 
             query = QtSql.QSqlQuery()
@@ -190,8 +260,14 @@ class ventas():
         except Exception as error:
             print('Error altaVentas: %s ' % str(error))
 
-
     def mostrarFacturacion(self):
+        """
+
+        Modulo que muestra
+
+        :return: None
+
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare('select codventa,codarticventa, cantidad, precio from ventas')
@@ -231,13 +307,13 @@ class ventas():
 
     def buscarFact(self):
         try:
-            index=0
-            cliente=var.ui.editCodigoCliente.text()
+            index = 0
+            cliente = var.ui.editCodigoCliente.text()
             var.ui.tablaFacturas.clearContents()
-            if cliente!="":
-                query=QtSql.QSqlQuery()
+            if cliente != "":
+                query = QtSql.QSqlQuery()
                 query.prepare('select codfact, fecha from facturas where dni=:dni')
-                query.bindValue(':dni',cliente)
+                query.bindValue(':dni', cliente)
                 if query.exec_():
                     while query.next():
                         var.ui.tablaFacturas.setRowCount(index + 1)
@@ -251,4 +327,3 @@ class ventas():
 
         except Exception as error:
             print('Error anularVenta: %s' % str(error))
-

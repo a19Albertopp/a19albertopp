@@ -36,7 +36,7 @@
 <span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">zipfile</span>
 
-<span class="kn">import</span> <span class="nn">var</span>
+<span class="kn">import</span> <span class="nn">var</span><span class="o">,</span> <span class="nn">conexion</span><span class="o">,</span> <span class="nn">ventas</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">clients</span>
 <span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span>
@@ -48,6 +48,7 @@
 
 <div class="viewcode-block" id="Eventos.Salir"><a class="viewcode-back" href="../src/events.html#events.Eventos.Salir">[documentos]</a>    <span class="k">def</span> <span class="nf">Salir</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+
 <span class="sd">        Método que cierra el programa</span>
 
 <span class="sd">        :param event: evento salir</span>
@@ -70,11 +71,7 @@
 
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error salir: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
-
-            <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">            EVENTOS CLIENTES</span>
-<span class="sd">            &quot;&quot;&quot;</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error salir: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Eventos.closeSalir"><a class="viewcode-back" href="../src/events.html#events.Eventos.closeSalir">[documentos]</a>    <span class="k">def</span> <span class="nf">closeSalir</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -93,7 +90,8 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error closesalir: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Eventos.validoDNI"><a class="viewcode-back" href="../src/events.html#events.Eventos.validoDNI">[documentos]</a>    <span class="k">def</span> <span class="nf">validoDNI</span><span class="p">():</span>
+
+<div class="viewcode-block" id="Eventos.validoDNI"><a class="viewcode-back" href="../src/events.html#events.Eventos.validoDNI">[documentos]</a>    <span class="k">def</span> <span class="nf">validoDNI</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Módulo que según sea correcto el dni, muestra una imagen distinta</span>
@@ -101,6 +99,7 @@
 <span class="sd">        :return: None</span>
 
 <span class="sd">        Si es falso escribe en el label una X roja, y si es verdadero escribe una V verde</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">dni</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
@@ -118,8 +117,9 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error módulo escribir valido DNI&#39;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="Eventos.cargarProv"><a class="viewcode-back" href="../src/events.html#events.Eventos.cargarProv">[documentos]</a>    <span class="k">def</span> <span class="nf">cargarProv</span><span class="p">():</span>
+<div class="viewcode-block" id="Eventos.cargarProv"><a class="viewcode-back" href="../src/events.html#events.Eventos.cargarProv">[documentos]</a>    <span class="k">def</span> <span class="nf">cargarProv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+
 <span class="sd">        CARGA LAS PROVIENCIAS AL INICIAR EL PROGRAMA</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -132,7 +132,7 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Eventos.Backup"><a class="viewcode-back" href="../src/events.html#events.Eventos.Backup">[documentos]</a>    <span class="k">def</span> <span class="nf">Backup</span><span class="p">():</span>
+<div class="viewcode-block" id="Eventos.Backup"><a class="viewcode-back" href="../src/events.html#events.Eventos.Backup">[documentos]</a>    <span class="k">def</span> <span class="nf">Backup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Módulo que realiza una copia de seguridad de la base de datos</span>
@@ -196,6 +196,7 @@
                 <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">var</span><span class="o">.</span><span class="n">salir</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error Abrir Aviso: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
@@ -243,7 +244,35 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">var</span><span class="o">.</span><span class="n">validar</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
-            <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div></div>
+            <span class="n">var</span><span class="o">.</span><span class="n">dlgaviso</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Eventos.restaurarBD"><a class="viewcode-back" href="../src/events.html#events.Eventos.restaurarBD">[documentos]</a>    <span class="k">def</span> <span class="nf">restaurarBD</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que restaura la base de datos</span>
+
+<span class="sd">        :return: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">filedlgabrir</span><span class="o">.</span><span class="n">getOpenFileName</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;Restaurar Copia de Seguridade&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;*.zip&#39;</span><span class="p">,</span>
+                                                        <span class="n">options</span><span class="o">=</span><span class="n">option</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">filedlgabrir</span><span class="o">.</span><span class="n">Accepted</span> <span class="ow">and</span> <span class="n">filename</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">file</span> <span class="o">=</span> <span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="k">as</span> <span class="n">bbdd</span><span class="p">:</span>
+                    <span class="n">bbdd</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">pwd</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+                <span class="n">bbdd</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">clients</span><span class="o">.</span><span class="n">Clients</span><span class="o">.</span><span class="n">limpiarCli</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarProductos</span><span class="p">()</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarClientes</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">mostrarVentasfac</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">mostrarFacturacion</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">limpiarFacturas</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">prepararventas</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error restaurarBD: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div></div>
 </pre></div>
 
           </div>

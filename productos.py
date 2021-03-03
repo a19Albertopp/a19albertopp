@@ -6,7 +6,13 @@ import conexion, events
 class Productos():
 
     def AltaProductos(self):
+        """
 
+        Modulo que da de alta un producto y recoge los valores de los edit y se los pasa a altaPro de la clase Conexion
+
+        :return: None
+
+        """
         try:
             newpro = []  # contiene todos los datos
             producto = [var.ui.editNombrePro, var.ui.editPrecioPro, var.ui.editStock]
@@ -24,6 +30,13 @@ class Productos():
             print('Error alta Productos: %s ' % str(error))
 
     def cargarPro(self):
+        """
+
+        Modulo que recoge los datos de un producto clicado de la tabla productos y los envia a la cargarProducto de la clase Conexion
+
+        :return: None
+
+        """
         try:
             fila = var.ui.tablaPro.selectedItems()
             producto = [var.ui.lblCodigoPro, var.ui.editNombrePro, var.ui.editPrecioPro]
@@ -38,6 +51,13 @@ class Productos():
             print('Error cargar Productos: %s ' % str(error))
 
     def bajaProducto(self):
+        """
+
+        Modulo que valida si se desea eliminar un producto y si es asi, llama al metodo bajaPro enviando el codigo del producto a eliminar
+
+        :return: None
+
+        """
         try:
             var.validar = False
             codigo = var.ui.lblCodigoPro.text()
@@ -54,6 +74,13 @@ class Productos():
             print('Error bajar Productos: %s' % str(error))
 
     def modifProducto(self):
+        """
+
+        Modulo que recoge los datos a modificar de un producto y los envia al metodo modifProducto de la clase Conexion
+
+        :return: None
+
+        """
 
         try:
             var.validar = False
@@ -72,6 +99,13 @@ class Productos():
             print('Error modifProducto: %s' % str(error))
 
     def limpiarPro(self):
+        """
+
+        Modulo que limpia los edit de la ventana productos
+
+        :return: None
+
+        """
 
         try:
             var.ui.lblCodigoPro.setText('')

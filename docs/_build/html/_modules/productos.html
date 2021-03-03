@@ -36,18 +36,19 @@
 <span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span>
 <span class="kn">import</span> <span class="nn">conexion</span><span class="o">,</span> <span class="nn">events</span>
 
+
 <div class="viewcode-block" id="Productos"><a class="viewcode-back" href="../src/productos.html#productos.Productos">[documentos]</a><span class="k">class</span> <span class="nc">Productos</span><span class="p">():</span>
 
 <div class="viewcode-block" id="Productos.AltaProductos"><a class="viewcode-back" href="../src/productos.html#productos.Productos.AltaProductos">[documentos]</a>    <span class="k">def</span> <span class="nf">AltaProductos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">newpro</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1">#contiene todos los datos</span>
-            <span class="n">producto</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editNombrePro</span><span class="p">,</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editPrecioPro</span><span class="p">,</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editStock</span><span class="p">]</span>
+            <span class="n">newpro</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># contiene todos los datos</span>
+            <span class="n">producto</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editNombrePro</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editPrecioPro</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editStock</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">producto</span><span class="p">:</span>
                 <span class="n">newpro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
             <span class="n">mensaje</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Desea dar de alta el Producto?&#39;</span><span class="p">)</span>
             <span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">AbrirAviso</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">validar</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">validar</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">newpro</span><span class="p">:</span>
                     <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">altaPro</span><span class="p">(</span><span class="n">newpro</span><span class="p">)</span>
                     <span class="n">Productos</span><span class="o">.</span><span class="n">limpiarPro</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -64,47 +65,46 @@
                 <span class="n">fila</span> <span class="o">=</span> <span class="p">[</span><span class="n">dato</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">dato</span> <span class="ow">in</span> <span class="n">fila</span><span class="p">]</span>  <span class="c1"># coge los datos de una fila de la tablaCli</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dato</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">producto</span><span class="p">):</span>
                 <span class="n">dato</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">fila</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># Introduce los datos de fila en los editText de client</span>
-            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargarProducto</span><span class="p">()</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargarProducto</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error cargar Productos: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-
-
 <div class="viewcode-block" id="Productos.bajaProducto"><a class="viewcode-back" href="../src/productos.html#productos.Productos.bajaProducto">[documentos]</a>    <span class="k">def</span> <span class="nf">bajaProducto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">var</span><span class="o">.</span><span class="n">validar</span><span class="o">=</span><span class="kc">False</span>
-            <span class="n">codigo</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoPro</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
-            <span class="n">mensaje</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Desea eliminar el Producto?&#39;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">validar</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">codigo</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoPro</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">mensaje</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Desea eliminar el Producto?&#39;</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoPro</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">!=</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoPro</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
                 <span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">AbrirAviso</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">validar</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">validar</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
                 <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">bajaPro</span><span class="p">(</span><span class="n">codigo</span><span class="p">)</span>
                 <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarProductos</span><span class="p">()</span>
                 <span class="n">Productos</span><span class="o">.</span><span class="n">limpiarPro</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error bajar Productos: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error bajar Productos: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Productos.modifProducto"><a class="viewcode-back" href="../src/productos.html#productos.Productos.modifProducto">[documentos]</a>    <span class="k">def</span> <span class="nf">modifProducto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">var</span><span class="o">.</span><span class="n">validar</span><span class="o">=</span><span class="kc">False</span>
-            <span class="n">newdata</span><span class="o">=</span><span class="p">[]</span>
-            <span class="n">codigo</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoPro</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
-            <span class="n">producto</span><span class="o">=</span><span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editNombrePro</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editPrecioPro</span><span class="p">,</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editStock</span><span class="p">]</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">validar</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">newdata</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">codigo</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoPro</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">producto</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editNombrePro</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editPrecioPro</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editStock</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">producto</span><span class="p">:</span>
                 <span class="n">newdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
-            <span class="n">mensaje</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Seguro que desea Modificar el Producto?&#39;</span><span class="p">)</span>
+            <span class="n">mensaje</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Seguro que desea Modificar el Producto?&#39;</span><span class="p">)</span>
             <span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">AbrirAviso</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">validar</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
-                <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">modifProducto</span><span class="p">(</span><span class="n">codigo</span><span class="p">,</span><span class="n">newdata</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">validar</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">modifProducto</span><span class="p">(</span><span class="n">codigo</span><span class="p">,</span> <span class="n">newdata</span><span class="p">)</span>
                 <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarProductos</span><span class="p">()</span>
                 <span class="n">Productos</span><span class="o">.</span><span class="n">limpiarPro</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error modifProducto: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error modifProducto: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
 <div class="viewcode-block" id="Productos.limpiarPro"><a class="viewcode-back" href="../src/productos.html#productos.Productos.limpiarPro">[documentos]</a>    <span class="k">def</span> <span class="nf">limpiarPro</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="k">try</span><span class="p">:</span>

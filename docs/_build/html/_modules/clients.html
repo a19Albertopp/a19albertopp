@@ -106,7 +106,8 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Clients.abrirCalendar"><a class="viewcode-back" href="../src/clients.html#clients.Clients.abrirCalendar">[documentos]</a>    <span class="k">def</span> <span class="nf">abrirCalendar</span><span class="p">():</span>
+
+<div class="viewcode-block" id="Clients.abrirCalendar"><a class="viewcode-back" href="../src/clients.html#clients.Clients.abrirCalendar">[documentos]</a>    <span class="k">def</span> <span class="nf">abrirCalendar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Modulo que abre la ventana del calendario</span>
@@ -209,7 +210,7 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error alta clientes: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Clients.limpiarCli"><a class="viewcode-back" href="../src/clients.html#clients.Clients.limpiarCli">[documentos]</a>    <span class="k">def</span> <span class="nf">limpiarCli</span><span class="p">():</span>
+<div class="viewcode-block" id="Clients.limpiarCli"><a class="viewcode-back" href="../src/clients.html#clients.Clients.limpiarCli">[documentos]</a>    <span class="k">def</span> <span class="nf">limpiarCli</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        limpia los datos del formulario cliente</span>
@@ -252,7 +253,7 @@
                 <span class="n">fila</span><span class="o">=</span><span class="p">[</span><span class="n">dato</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">dato</span> <span class="ow">in</span> <span class="n">fila</span><span class="p">]</span> <span class="c1">#coge los datos de una fila de la tablaCli</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">dato</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">client</span><span class="p">):</span>
                 <span class="n">dato</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">fila</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="c1">#Introduce los datos de fila en los editText de client</span>
-            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargarCliente</span><span class="p">()</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargarCliente</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
@@ -279,7 +280,7 @@
             <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">validar</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
                 <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">bajaCli</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span>
                 <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarClientes</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-                <span class="n">Clients</span><span class="o">.</span><span class="n">limpiarCli</span><span class="p">()</span>
+                <span class="n">Clients</span><span class="o">.</span><span class="n">limpiarCli</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error bajar clientes: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
@@ -304,7 +305,7 @@
                 <span class="n">newdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
             <span class="n">newdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">cmbProvincia</span><span class="o">.</span><span class="n">currentText</span><span class="p">())</span> <span class="c1">#Selecciona la provincia</span>
             <span class="n">newdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">sex</span><span class="p">)</span>
-            <span class="n">var</span><span class="o">.</span><span class="n">pay</span><span class="o">=</span><span class="n">Clients</span><span class="o">.</span><span class="n">selPago</span><span class="p">()</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">pay</span><span class="o">=</span><span class="n">Clients</span><span class="o">.</span><span class="n">selPago</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="n">newdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">pay</span><span class="p">)</span>
             <span class="n">newdata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">spinEdad</span><span class="o">.</span><span class="n">value</span><span class="p">())</span>
             <span class="n">cod</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoCli</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
@@ -328,7 +329,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">op</span><span class="o">=</span><span class="kc">False</span>
-            <span class="n">Clients</span><span class="o">.</span><span class="n">limpiarCli</span><span class="p">()</span>
+            <span class="n">Clients</span><span class="o">.</span><span class="n">limpiarCli</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarClientes</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error reloadCli: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
@@ -346,7 +347,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">dni</span><span class="o">=</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
-            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargarCliente</span><span class="p">()</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargarCliente</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">buscaCli</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error buscarCli: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div></div>

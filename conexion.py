@@ -31,6 +31,8 @@ class Conexion():
             print('Conexión Establecida')
             return True
 
+
+
     def resource_path(relative_path):
         """
 

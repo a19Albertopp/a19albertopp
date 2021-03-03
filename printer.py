@@ -9,6 +9,13 @@ import conexion
 class Printer():
 
     def Cabecera(self):
+        """
+
+        Modulo que imprime la cabecera del informe
+
+        :return: None
+
+        """
 
         logo = conexion.Conexion.resource_path('img\logo.png')
         var.rep.drawImage(logo, 450, 752)
@@ -27,6 +34,15 @@ class Printer():
         var.rep.drawString(50, 760, texttelf)
 
     def pie(textlistado):
+        """
+
+        Modulo que imprime el pie del informe
+
+        :param textlistado: Cabecera del listado
+        :type textlistado: String
+        :return: None
+
+        """
         try:
             var.rep.line(50, 50, 525, 50)
             fecha = datetime.today()
@@ -39,6 +55,13 @@ class Printer():
             print('Error pie: %s ' % str(error))
 
     def cabeceracli(self):
+        """
+
+        Modulo que imprime la cabecera del informe de clientes
+
+        :return: None
+
+        """
 
         try:
             var.rep.setFont('Helvetica-Oblique', size=9)
@@ -57,6 +80,13 @@ class Printer():
             print('Error cabecerainf: %s ' % str(error))
 
     def cabeceraFactCli(self):
+        """
+
+        Modulo que imprime la cabecera del informe de las facturas de un cliente
+
+        :return: None
+
+        """
 
         try:
             var.rep.setFont('Helvetica-Oblique', size=9)
@@ -86,6 +116,13 @@ class Printer():
             print('Error cabeceraPro: %s ' % str(error))
 
     def cabeceraPro(self):
+        """
+
+        Modulo que imprime la cabecera del informe de los productos
+
+        :return: None
+
+        """
 
         try:
             var.rep.setFont('Helvetica-Oblique', size=9)
@@ -104,6 +141,13 @@ class Printer():
             print('Error cabeceraFactCli: %s ' % str(error))
 
     def reportFactCli(self):
+        """
+
+        Modulo que crea el informe de facturas del cliente y lo imprime llamando a Cabecera,CabeceraFactCli,pie, y escribiendo los datos de esas facturas en el pdf que crea
+
+        :return: None
+
+        """
         try:
             precio_total = 0
             textlistado = "LISTADO FACTURAS CLIENTES"
@@ -155,6 +199,14 @@ class Printer():
             print('Error reportFactCli: %s ' % str(error))
 
     def reportCli(self):
+        """
+
+        Modulo que crea el informe de todos los clientes que hay en la BD. Llama a los metodos Cabecera,cabeceracli,pie para crear el informe y ese modulo imprime todos los clientes.
+        Crea un pdf donde se guarda el informe generado
+
+        :return: None
+
+        """
         try:
             textlistado = 'LISTADO CLIENTES'
             var.rep = canvas.Canvas(conexion.Conexion.resource_path('informes/listadoclientes.pdf'))
@@ -195,6 +247,14 @@ class Printer():
             print('Error reportCli: %s ' % str(error))
 
     def reportProductos(self):
+        """
+
+        Modulo que crea un pdf de informe de productos, en el cual se imprimen todos los productos registrados en la BD
+        Llama a los metodos Cabecera,pie,cabeceraPro para crear el informe
+
+        :return: None
+
+        """
         try:
             textlistado = 'LISTADO DE PRODUCTOS'
             var.rep = canvas.Canvas(conexion.Conexion.resource_path('informes/listadoproductos.pdf'), pagesize=A4)
@@ -234,6 +294,15 @@ class Printer():
             print('Error reportPro: %s ' % str(error))
 
     def cabecerafac(codfact):
+        """
+
+        Modulo que recibe el codigo de una factura y imprime la cabecera del informe de una factura de un cliente
+
+        :param codfact: Codigo de la factura
+        :type codfact: Integer
+        :return: None
+
+        """
         try:
             var.rep.setFont('Helvetica-Bold', size=11)
             var.rep.drawString(55, 725, 'Cliente: ')
@@ -277,6 +346,14 @@ class Printer():
             print('Error cabecfac %s' % str(error))
 
     def reportFac(self):
+        """
+
+        Modulo que imprime el informe de una factura de un cliente en un pdf.
+        Llama a los metodo Cabecera,pie,cabecerafact para crear el informe
+
+        :return: None
+
+        """
         try:
             textlistado = 'FACTURA'
             var.rep = canvas.Canvas(conexion.Conexion.resource_path('informes/factura.pdf'), pagesize=A4)
