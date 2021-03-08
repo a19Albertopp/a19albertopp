@@ -56,7 +56,6 @@ class Eventos():
         except Exception as error:
             print('Error closesalir: %s' % str(error))
 
-
     def validoDNI(self):
         """
 
@@ -239,3 +238,35 @@ class Eventos():
 
         except Exception as error:
             print('Error restaurarBD: %s' % str(error))
+
+    def AbrirAbout():
+        """
+
+        Modulo que abre una ventana de About
+
+        :return: None
+        :rtype: None
+
+        """
+
+        try:
+            var.dlgabout.show()
+            if var.dlgabout.exec_():
+                var.dlgabout.hide()
+            else:
+                var.dlgabout.hide()
+        except Exception as error:
+            print('Error Abrir About: %s ' % str(error))
+
+    def cerrarAvisoAbout():
+        """
+
+        Modulo que cierra la ventana About
+
+        :return: None
+        :rtype: None
+
+        """
+        var.dlgabout.show()
+        if var.dlgabout.exec_():
+            var.dlgabout    .hide()

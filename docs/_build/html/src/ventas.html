@@ -40,67 +40,154 @@
 <dl class="py method">
 <dt id="ventas.ventas.abrirCalendarVentas">
 <code class="sig-name descname">abrirCalendarVentas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#ventas.abrirCalendarVentas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.ventas.abrirCalendarVentas" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que abre la ventana del calendario</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="ventas.ventas.altaVentas">
 <code class="sig-name descname">altaVentas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#ventas.altaVentas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.ventas.altaVentas" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que da de alta una venta en la BD, y recarga la tablaFacturar</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="ventas.ventas.altasFacturacion">
 <code class="sig-name descname">altasFacturacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#ventas.altasFacturacion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.ventas.altasFacturacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que da de alta una venta asociada a una factura en la tablaFacturar y llama al metodo altaVenta de la clase Conexion para darla de alta en la BD</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="ventas.ventas.anularVenta">
 <code class="sig-name descname">anularVenta</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#ventas.anularVenta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.ventas.anularVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que recoge los datos de la venta de los elementos seleccionados de la tablaFacturar y los pasa a anulaVenta de la clase Conexión, para eliminar la venta</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="ventas.ventas.borrarFactura">
 <code class="sig-name descname">borrarFactura</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#ventas.borrarFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.ventas.borrarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que borra una factura de la BD</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="ventas.ventas.buscarFact">
 <code class="sig-name descname">buscarFact</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#ventas.buscarFact"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.ventas.buscarFact" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que busca las facturas asociadas a un cliente y las visualiza en la tablaFacturas, visualizando solo las facturas vinculadas al cliente</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="ventas.ventas.cargarFactura">
 <code class="sig-name descname">cargarFactura</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#ventas.cargarFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.ventas.cargarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que carga los datos de una factura seleccionada de la tablaFacturas en los edit de la ventana de Facturacion</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="ventas.ventas.crearFactura">
 <code class="sig-name descname">crearFactura</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#ventas.crearFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.ventas.crearFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que recoge los datos de una factura de los edit y crea la factura en la BD</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="ventas.ventas.limpiarFacturas">
 <code class="sig-name descname">limpiarFacturas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#ventas.limpiarFacturas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.ventas.limpiarFacturas" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que limpia los edit de la ventana Facturacion</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="ventas.ventas.mostrarFactura">
 <code class="sig-name descname">mostrarFactura</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#ventas.mostrarFactura"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.ventas.mostrarFactura" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que muestra las facturas guardadas en la BD en la tablaFacturas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="ventas.ventas.mostrarFacturacion">
 <code class="sig-name descname">mostrarFacturacion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#ventas.mostrarFacturacion"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.ventas.mostrarFacturacion" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que muestra</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="ventas.ventas.mostrarVentasfac">
 <code class="sig-name descname">mostrarVentasfac</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#ventas.mostrarVentasfac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.ventas.mostrarVentasfac" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que llama a listadoVentasfac para cargar las ventas y a cargarCmbventa para cargar el comboBox de la tabla Facturar</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="ventas.ventas.prepararventas">
 <code class="sig-name descname">prepararventas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ventas.html#ventas.prepararventas"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#ventas.ventas.prepararventas" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que prepara la tablaFacturar y le agrega el comboBox</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>Integer</em>) – Posicion inicial</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

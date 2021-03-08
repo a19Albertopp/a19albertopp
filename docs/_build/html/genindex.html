@@ -41,6 +41,7 @@
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
+ | <a href="#I"><strong>I</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#O"><strong>O</strong></a>
@@ -56,6 +57,8 @@
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="src/events.html#events.Eventos.AbrirAbout">AbrirAbout() (método de events.Eventos)</a>
+</li>
       <li><a href="src/events.html#events.Eventos.AbrirAviso">AbrirAviso() (método de events.Eventos)</a>
 </li>
       <li><a href="src/clients.html#clients.Clients.abrirCalendar">abrirCalendar() (método de clients.Clients)</a>
@@ -70,10 +73,10 @@
 </li>
       <li><a href="src/clients.html#clients.Clients.AltaClientes">AltaClientes() (método de clients.Clients)</a>
 </li>
-      <li><a href="src/conexion.html#conexion.Conexion.altaPro">altaPro() (método de conexion.Conexion)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="src/conexion.html#conexion.Conexion.altaPro">altaPro() (método de conexion.Conexion)</a>
+</li>
       <li><a href="src/productos.html#productos.Productos.AltaProductos">AltaProductos() (método de productos.Productos)</a>
 </li>
       <li><a href="src/ventas.html#ventas.ventas.altasFacturacion">altasFacturacion() (método de ventas.ventas)</a>
@@ -147,11 +150,13 @@
 </li>
       <li><a href="src/productos.html#productos.Productos.cargarPro">cargarPro() (método de productos.Productos)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="src/conexion.html#conexion.Conexion.cargarProducto">cargarProducto() (método de conexion.Conexion)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="src/events.html#events.Eventos.cargarProv">cargarProv() (método de events.Eventos)</a>
+</li>
+      <li><a href="src/events.html#events.Eventos.cerrarAvisoAbout">cerrarAvisoAbout() (método de events.Eventos)</a>
 </li>
       <li>
     clients
@@ -225,6 +230,25 @@
   </ul></td>
 </tr></table>
 
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    importar
+
+      <ul>
+        <li><a href="src/importar.html#module-importar">módulo</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="src/importar.html#importar.Importar">Importar (clase en importar)</a>
+</li>
+      <li><a href="src/importar.html#importar.Importar.importarDatos">importarDatos() (método de importar.Importar)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -285,11 +309,15 @@
 </li>
         <li><a href="src/events.html#module-events">events</a>
 </li>
+        <li><a href="src/importar.html#module-importar">importar</a>
+</li>
         <li><a href="src/main.html#module-main">main</a>
 </li>
         <li><a href="src/printer.html#module-printer">printer</a>
 </li>
         <li><a href="src/productos.html#module-productos">productos</a>
+</li>
+        <li><a href="src/test.html#module-test">test</a>
 </li>
         <li><a href="src/toolbarbackup.html#module-toolbarbackup">toolbarbackup</a>
 </li>
@@ -310,6 +338,10 @@
         <li><a href="src/ventas.html#module-ventas">ventas</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="src/test.html#test.MyTestCase">MyTestCase (clase en test)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -340,6 +372,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="src/printer.html#printer.Printer">Printer (clase en printer)</a>
+</li>
+      <li><a href="src/conexion.html#conexion.Conexion.productoExistente">productoExistente() (método de conexion.Conexion)</a>
 </li>
       <li>
     productos
@@ -389,6 +423,8 @@
       <li><a href="src/printer.html#printer.Printer.reportFactCli">reportFactCli() (método de printer.Printer)</a>
 </li>
       <li><a href="src/printer.html#printer.Printer.reportProductos">reportProductos() (método de printer.Printer)</a>
+</li>
+      <li><a href="src/conexion.html#conexion.Conexion.resource_path">resource_path() (método de conexion.Conexion)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -441,14 +477,29 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li>
+    test
+
+      <ul>
+        <li><a href="src/test.html#module-test">módulo</a>
+</li>
+      </ul></li>
+      <li><a href="src/test.html#test.MyTestCase.test_codigo_producto">test_codigo_producto() (método de test.MyTestCase)</a>
+</li>
+      <li><a href="src/test.html#test.MyTestCase.test_conexion">test_conexion() (método de test.MyTestCase)</a>
+</li>
+      <li><a href="src/test.html#test.MyTestCase.test_dni">test_dni() (método de test.MyTestCase)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="src/test.html#test.MyTestCase.test_factura">test_factura() (método de test.MyTestCase)</a>
+</li>
+      <li>
     toolbarbackup
 
       <ul>
         <li><a href="src/toolbarbackup.html#module-toolbarbackup">módulo</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     toolbarsalir
 

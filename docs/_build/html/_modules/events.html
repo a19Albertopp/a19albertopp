@@ -90,7 +90,6 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error closesalir: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
-
 <div class="viewcode-block" id="Eventos.validoDNI"><a class="viewcode-back" href="../src/events.html#events.Eventos.validoDNI">[documentos]</a>    <span class="k">def</span> <span class="nf">validoDNI</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -272,7 +271,39 @@
             <span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">prepararventas</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error restaurarBD: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error restaurarBD: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Eventos.AbrirAbout"><a class="viewcode-back" href="../src/events.html#events.Eventos.AbrirAbout">[documentos]</a>    <span class="k">def</span> <span class="nf">AbrirAbout</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que abre una ventana de About</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">dlgabout</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">dlgabout</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">dlgabout</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">var</span><span class="o">.</span><span class="n">dlgabout</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error Abrir About: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Eventos.cerrarAvisoAbout"><a class="viewcode-back" href="../src/events.html#events.Eventos.cerrarAvisoAbout">[documentos]</a>    <span class="k">def</span> <span class="nf">cerrarAvisoAbout</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que cierra la ventana About</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">dlgabout</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">dlgabout</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">dlgabout</span>    <span class="o">.</span><span class="n">hide</span><span class="p">()</span></div></div>
 </pre></div>
 
           </div>

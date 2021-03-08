@@ -194,7 +194,6 @@ class ventas():
             subtotal = round(float(cantidad) * float(dato[1]), 2)
             var.venta.append(subtotal)
             var.venta.append(row)
-            # sleep(1)
             if codfac != '' and articulo != '' and cantidad != '':
                 conexion.Conexion.altaVenta(self)
                 var.subfac = round(float(subtotal) + float(var.subfac), 2)
@@ -226,39 +225,7 @@ class ventas():
         except Exception as error:
             print('Error mostrarVentasfac: %s' % str(error))
 
-    def altaVentas(self):
-        """
 
-        Modulo que da de alta una venta en la BD, y recarga la tablaFacturar
-
-        :return: None
-
-        """
-        try:
-
-            query = QtSql.QSqlQuery()
-            query.prepare(
-                'insert into ventas (codfacventa, codarticventa, cantidad, precio) VALUES (:codfacventa, :codarticventa,'
-                ' :cantidad, :precio )')
-            query.bindValue(':codfacventa', int(var.venta[0]))
-            query.bindValue(':codarticventa', int(var.venta[1]))
-            query.bindValue(':cantidad', int(var.venta[3]))
-            query.bindValue(':precio', float(var.venta[4]))
-            row = var.ui.tablaFacturar.currentRow()
-            if query.exec_():
-                var.ui.lblstatus.setText('Venta Realizada')
-                var.ui.tablaFacturar.setItem(row, 1, QtWidgets.QTableWidgetItem(str(var.venta[2])))
-                var.ui.tablaFacturar.setItem(row, 2, QtWidgets.QTableWidgetItem(str(var.venta[3])))
-                var.ui.tablaFacturar.setItem(row, 3, QtWidgets.QTableWidgetItem(str(var.venta[4])))
-                var.ui.tablaFacturar.setItem(row, 4, QtWidgets.QTableWidgetItem(str(var.venta[5])))
-                row = row + 1
-                var.ui.tablaFacturar.insertRow(row)
-                var.ui.tablaFacturar.setCellWidget(row, 1, var.cmbfacturar)
-                var.ui.tablaFacturar.scrollToBottom()
-                ventas.cargarCmbVenta(var.cmbfacturar)
-                ventas.mostrarVentasfac(self)
-        except Exception as error:
-            print('Error altaVentas: %s ' % str(error))
 
     def mostrarFacturacion(self):
         """
@@ -294,6 +261,14 @@ class ventas():
             print('Error mostrarFacturacion: %s ' % str(error))
 
     def anularVenta(self):
+        """
+
+        Modulo que recoge los datos de la venta de los elementos seleccionados de la tablaFacturar y los pasa a anulaVenta de la clase Conexión, para eliminar la venta
+
+        :return: None
+        :rtype: None
+
+        """
         try:
             fila = var.ui.tablaFacturar.selectedItems()
             if fila:
@@ -306,6 +281,14 @@ class ventas():
             print('Error anularVenta: %s' % str(error))
 
     def buscarFact(self):
+        """
+
+        Modulo que busca las facturas asociadas a un cliente y las visualiza en la tablaFacturas, visualizando solo las facturas vinculadas al cliente
+
+        :return: None
+        :rtype: None
+
+        """
         try:
             index = 0
             cliente = var.ui.editCodigoCliente.text()

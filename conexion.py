@@ -31,8 +31,6 @@ class Conexion():
             print('Conexión Establecida')
             return True
 
-
-
     def resource_path(relative_path):
         """
 
@@ -116,7 +114,6 @@ class Conexion():
                 index += 1
         else:
             print("Error mostrar clientes: ", query.lastError().text())
-
 
     def cargarCliente(self):
         """
@@ -271,7 +268,7 @@ class Conexion():
         else:
             print("Error Alta Producto: ", query.lastError().text())
 
-    def mostrarProductos(self):
+    def mostrarProductos():
         """
 
         Módulo que carga los productos en la tablaPro
@@ -471,7 +468,6 @@ class Conexion():
                             var.ui.tablaFacturar.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                     index += 1
                     var.subfac = round(float(subtotal) + float(var.subfac), 2)
-                # ventas.Ven tas.prepararTablaventas(index)
             if int(index) > 0:
                 ventas.ventas.prepararventas(index)
             else:
@@ -504,3 +500,28 @@ class Conexion():
             ventas.ventas.mostrarVentasfac()
         else:
             print("Error baja venta: ", query.lastError().text())
+
+    def productoExistente(nombre):
+        """
+
+        Modulo que busca y valida si existe un producto en la base de datos
+
+        :param nombre: Nombre del producto
+        :type nombre: String
+        :return: Retorna una coleccion de datos de un producto
+        :rtype: producto
+
+        """
+        producto = []
+        query = QtSql.QSqlQuery()
+        query.prepare('select codigo, precio_unidad, stock from articulos where nombre = :nombre')
+        query.bindValue(':nombre', str(nombre))
+        if query.exec_():
+            while query.next():
+                producto.append(query.value(0))
+                producto.append(nombre)
+                producto.append(query.value(1))
+                producto.append(query.value(2))
+                return producto
+        else:
+            return False

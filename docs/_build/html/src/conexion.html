@@ -77,12 +77,27 @@ Rescarga la tablaPro</p>
 <dl class="py method">
 <dt id="conexion.Conexion.altaVenta">
 <code class="sig-name descname">altaVenta</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaVenta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.altaVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que inserta una venta en la base de datos y carga los datos de la venta en la tablaFacturar</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="conexion.Conexion.anulaVenta">
 <code class="sig-name descname">anulaVenta</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.anulaVenta"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.anulaVenta" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que recibe el codigo de una venta y la elimina de la base de datos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>a</strong> (<em>Integer</em>) – Codigo de la venta a eliminar</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="conexion.Conexion.bajaCli">
@@ -105,7 +120,16 @@ Rescarga la tablaPro</p>
 <dl class="py method">
 <dt id="conexion.Conexion.bajaPro">
 <code class="sig-name descname">bajaPro</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.bajaPro"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.bajaPro" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que elemina un producto de la base de datos recibiendo el código del producto</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>a</strong> (<em>Integer</em>) – Codigo del producto a eliminar</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="conexion.Conexion.buscaCli">
@@ -128,17 +152,41 @@ Rescarga la tablaPro</p>
 <dl class="py method">
 <dt id="conexion.Conexion.cargarCliente">
 <code class="sig-name descname">cargarCliente</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarCliente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarCliente" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Carga los datos de un cliente cuando se clicka en la tabla</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Tipo del valor devuelto</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="conexion.Conexion.cargarCmbventa">
 <code class="sig-name descname">cargarCmbventa</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarCmbventa"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarCmbventa" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que carga los nombres de los productos en el comboBox de la tabla Facturar que recibe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>a</strong> (<em>ComboBox</em>) – ComboBox de los nombres de los productos</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="conexion.Conexion.cargarProducto">
 <code class="sig-name descname">cargarProducto</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargarProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.cargarProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que carga los valores de los productos desde la bd a los edit de la ventana de productos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="conexion.Conexion.db_connect">
@@ -161,7 +209,16 @@ Rescarga la tablaPro</p>
 <dl class="py method">
 <dt id="conexion.Conexion.listadoVentasfac">
 <code class="sig-name descname">listadoVentasfac</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.listadoVentasfac"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.listadoVentasfac" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que recibe el codigo de la factura y carga los datos de esa factura en la tablaFacturar</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>a</strong> (<em>Integer</em>) – Codigo de la factura</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="conexion.Conexion.modifCli">
@@ -188,18 +245,33 @@ hay en los widgets. Muestra mensaje en la barra de estado.</p>
 <dl class="py method">
 <dt id="conexion.Conexion.modifProducto">
 <code class="sig-name descname">modifProducto</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">newdata</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.modifProducto"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.modifProducto" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que recibe el codigo de un producto y valores nuevos del mismo para realizar la actualizacion de esos valores en la base de datos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>Integer</em>) – Codigo del producto a modificar</p></li>
+<li><p><strong>newdata</strong> (<em>Coleccion de Strings</em>) – Valores nuevos a actualizar en el producto</p></li>
+</ul>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="conexion.Conexion.mostrarClientes">
 <code class="sig-name descname">mostrarClientes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.mostrarClientes"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.mostrarClientes" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Carga los clientes de la base de datos en la tablaCli</p>
 <dl class="field-list simple">
-<dt class="field-odd">Devuelve</dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>a</strong> (<em>Boolean</em>) – Boolean para realizar la busqueda de un cliente concreto o no</p>
 </dd>
-<dt class="field-even">Tipo del valor devuelto</dt>
+<dt class="field-even">Devuelve</dt>
 <dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -221,7 +293,53 @@ hay en los widgets. Muestra mensaje en la barra de estado.</p>
 <dl class="py method">
 <dt id="conexion.Conexion.obtenCodPrec">
 <code class="sig-name descname">obtenCodPrec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.obtenCodPrec"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.obtenCodPrec" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modulo que a partir del nombre de un articulo, busca en la base de datos su codigo y precio por unidad</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>a</strong> (<em>String</em>) – String nombre del articulo</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Codigo y precio unidad del producto</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>Listra</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.productoExistente">
+<code class="sig-name descname">productoExistente</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.productoExistente"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.productoExistente" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Modulo que busca y valida si existe un producto en la base de datos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>nombre</strong> (<em>String</em>) – Nombre del producto</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Retorna una coleccion de datos de un producto</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>producto</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="conexion.Conexion.resource_path">
+<code class="sig-name descname">resource_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.resource_path"><span class="viewcode-link">[fuente]</span></a><a class="headerlink" href="#conexion.Conexion.resource_path" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Obtiene el directorio de los recursos para hacer el onefile</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros</dt>
+<dd class="field-odd"><p><strong>a</strong> (<em>String</em>) – Ruta del archivo que queremos localizar</p>
+</dd>
+<dt class="field-even">Devuelve</dt>
+<dd class="field-even"><p>Ruta del recurso</p>
+</dd>
+<dt class="field-odd">Tipo del valor devuelto</dt>
+<dd class="field-odd"><p>String</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

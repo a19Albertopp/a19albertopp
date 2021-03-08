@@ -32,8 +32,11 @@
           <div class="body" role="main">
             
   <h1>Código fuente para conexion</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">QtSql</span><span class="p">,</span> <span class="n">QtCore</span>
-<span class="kn">import</span> <span class="nn">var</span><span class="o">,</span><span class="nn">ventas</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">QtSql</span><span class="p">,</span> <span class="n">QtCore</span>
+<span class="kn">import</span> <span class="nn">var</span><span class="o">,</span> <span class="nn">ventas</span>
 
 
 <div class="viewcode-block" id="Conexion"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion">[documentos]</a><span class="k">class</span> <span class="nc">Conexion</span><span class="p">():</span>
@@ -52,7 +55,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">db</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlDatabase</span><span class="o">.</span><span class="n">addDatabase</span><span class="p">(</span><span class="s1">&#39;QSQLITE&#39;</span><span class="p">)</span>
-        <span class="n">db</span><span class="o">.</span><span class="n">setDatabaseName</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">setDatabaseName</span><span class="p">(</span><span class="n">Conexion</span><span class="o">.</span><span class="n">resource_path</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">db</span><span class="o">.</span><span class="n">open</span><span class="p">():</span>
             <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;No se puede abrir la base de datos&#39;</span><span class="p">,</span>
                                            <span class="s1">&#39;No se puede establecer conexion.</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="s1">&#39;Haz Click para Cancelar.&#39;</span><span class="p">,</span>
@@ -60,7 +63,25 @@
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Conexión Establecida&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">True</span></div>
+            <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="Conexion.resource_path"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.resource_path">[documentos]</a>    <span class="k">def</span> <span class="nf">resource_path</span><span class="p">(</span><span class="n">relative_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Obtiene el directorio de los recursos para hacer el onefile</span>
+
+<span class="sd">        :param a: Ruta del archivo que queremos localizar</span>
+<span class="sd">        :type a: String</span>
+<span class="sd">        :return: Ruta del recurso</span>
+<span class="sd">        :rtype: String</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">base_path</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_MEIPASS</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">base_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Conexion.altaCli"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.altaCli">[documentos]</a>    <span class="k">def</span> <span class="nf">altaCli</span><span class="p">(</span><span class="n">cliente</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -99,6 +120,8 @@
 
 <span class="sd">        Carga los clientes de la base de datos en la tablaCli</span>
 
+<span class="sd">        :param a: Boolean para realizar la busqueda de un cliente concreto o no</span>
+<span class="sd">        :type a: Boolean</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        :rtype: None</span>
 
@@ -126,7 +149,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error mostrar clientes: &quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">.</span><span class="n">lastError</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">())</span></div>
 
-    <span class="k">def</span> <span class="nf">cargarCliente</span><span class="p">():</span>
+<div class="viewcode-block" id="Conexion.cargarCliente"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.cargarCliente">[documentos]</a>    <span class="k">def</span> <span class="nf">cargarCliente</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Carga los datos de un cliente cuando se clicka en la tabla</span>
@@ -135,7 +158,6 @@
 <span class="sd">        :rtype: None</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="Conexion.cargarCliente"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.cargarCliente">[documentos]</a>    <span class="k">def</span> <span class="nf">cargarCliente</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dni</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editDni</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
         <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;select * from clientes where dni = :dni;&#39;</span><span class="p">)</span>
@@ -309,6 +331,13 @@
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error mostrar Productos: &quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">.</span><span class="n">lastError</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="Conexion.cargarProducto"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.cargarProducto">[documentos]</a>    <span class="k">def</span> <span class="nf">cargarProducto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que carga los valores de los productos desde la bd a los edit de la ventana de productos</span>
+
+<span class="sd">        :return: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">codigo</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoPro</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
         <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;select * from articulos where codigo = :codigo;&#39;</span><span class="p">)</span>
@@ -320,6 +349,15 @@
                 <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">editStock</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span></div>
 
 <div class="viewcode-block" id="Conexion.bajaPro"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.bajaPro">[documentos]</a>    <span class="k">def</span> <span class="nf">bajaPro</span><span class="p">(</span><span class="n">codigoPro</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que elemina un producto de la base de datos recibiendo el código del producto</span>
+
+<span class="sd">        :param a: Codigo del producto a eliminar</span>
+<span class="sd">        :type a: Integer</span>
+<span class="sd">        :return:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
         <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span>
             <span class="s1">&#39;delete from articulos where codigo=:codigoPro&#39;</span><span class="p">)</span>  <span class="c1"># Coge el texto del DNI y elimina al cliente con ese DNI</span>
@@ -331,7 +369,17 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error eliminar producto&#39;</span><span class="p">,</span> <span class="n">query</span><span class="o">.</span><span class="n">lastError</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="Conexion.modifProducto"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.modifProducto">[documentos]</a>    <span class="k">def</span> <span class="nf">modifProducto</span><span class="p">(</span><span class="n">codigo</span><span class="p">,</span> <span class="n">newdata</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="sd">        Modulo que recibe el codigo de un producto y valores nuevos del mismo para realizar la actualizacion de esos valores en la base de datos</span>
+
+<span class="sd">        :param a: Codigo del producto a modificar</span>
+<span class="sd">        :type a: Integer</span>
+<span class="sd">        :param newdata: Valores nuevos a actualizar en el producto</span>
+<span class="sd">        :type newdata: Coleccion de Strings</span>
+<span class="sd">        :return: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
         <span class="n">codigo</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">codigo</span><span class="p">)</span>
         <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;update articulos set nombre=:nombre, precio_unidad=:precio, stock=:stock where codigo=:codigo&#39;</span><span class="p">)</span>
@@ -346,6 +394,16 @@
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error modificar Producto: &quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">.</span><span class="n">lastError</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="Conexion.obtenCodPrec"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.obtenCodPrec">[documentos]</a>    <span class="k">def</span> <span class="nf">obtenCodPrec</span><span class="p">(</span><span class="n">articulo</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que a partir del nombre de un articulo, busca en la base de datos su codigo y precio por unidad</span>
+
+<span class="sd">        :param a: String nombre del articulo</span>
+<span class="sd">        :type a: String</span>
+<span class="sd">        :return: Codigo y precio unidad del producto</span>
+<span class="sd">        :rtype: Listra</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dato</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
         <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;select codigo, precio_unidad from articulos where nombre = :articulo&#39;</span><span class="p">)</span>
@@ -356,6 +414,13 @@
         <span class="k">return</span> <span class="n">dato</span></div>
 
 <div class="viewcode-block" id="Conexion.altaVenta"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.altaVenta">[documentos]</a>    <span class="k">def</span> <span class="nf">altaVenta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que inserta una venta en la base de datos y carga los datos de la venta en la tablaFacturar</span>
+
+<span class="sd">        :return: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
         <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span>
             <span class="s1">&#39;insert into ventas (codfactventa, codarticventa, cantidad, precio) VALUES (:codfactventa, :codarticventa,&#39;</span>
@@ -380,6 +445,15 @@
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error alta venta: &quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">.</span><span class="n">lastError</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="Conexion.cargarCmbventa"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.cargarCmbventa">[documentos]</a>    <span class="k">def</span> <span class="nf">cargarCmbventa</span><span class="p">(</span><span class="n">cmbfacturar</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que carga los nombres de los productos en el comboBox de la tabla Facturar que recibe</span>
+
+<span class="sd">        :param a: ComboBox de los nombres de los productos</span>
+<span class="sd">        :type a: ComboBox</span>
+<span class="sd">        :return: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">var</span><span class="o">.</span><span class="n">cmbfacturar</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
         <span class="n">var</span><span class="o">.</span><span class="n">cmbfacturar</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
@@ -389,6 +463,15 @@
                 <span class="n">var</span><span class="o">.</span><span class="n">cmbfacturar</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span></div>
 
 <div class="viewcode-block" id="Conexion.listadoVentasfac"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.listadoVentasfac">[documentos]</a>    <span class="k">def</span> <span class="nf">listadoVentasfac</span><span class="p">(</span><span class="n">codfac</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que recibe el codigo de la factura y carga los datos de esa factura en la tablaFacturar</span>
+
+<span class="sd">        :param a: Codigo de la factura</span>
+<span class="sd">        :type a: Integer</span>
+<span class="sd">        :return: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">clearContents</span><span class="p">()</span>
@@ -414,12 +497,11 @@
                             <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">articulo</span><span class="p">)))</span>
                             <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cantidad</span><span class="p">)))</span>
                             <span class="n">subtotal</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">cantidad</span><span class="p">)</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">precio</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
-                            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">precio</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;€&#39;</span><span class="p">))</span>
-                            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">subtotal</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;€&#39;</span><span class="p">))</span>
-                            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">setTextAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+                            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">precio</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;€&#39;</span><span class="p">))</span>
+                            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">subtotal</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;€&#39;</span><span class="p">))</span>
+                            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tablaFacturar</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">setTextAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
                     <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
                     <span class="n">var</span><span class="o">.</span><span class="n">subfac</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">subtotal</span><span class="p">)</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">subfac</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
-                <span class="c1"># ventas.Ven tas.prepararTablaventas(index)</span>
             <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">prepararventas</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -435,6 +517,15 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error listadoVentasfac: </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Conexion.anulaVenta"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.anulaVenta">[documentos]</a>    <span class="k">def</span> <span class="nf">anulaVenta</span><span class="p">(</span><span class="n">codVenta</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que recibe el codigo de una venta y la elimina de la base de datos</span>
+
+<span class="sd">        :param a: Codigo de la venta a eliminar</span>
+<span class="sd">        :type a: Integer</span>
+<span class="sd">        :return: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
         <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;delete from ventas where codventa = :codVenta&#39;</span><span class="p">)</span>
         <span class="n">query</span><span class="o">.</span><span class="n">bindValue</span><span class="p">(</span><span class="s1">&#39;:codVenta&#39;</span><span class="p">,</span> <span class="n">codVenta</span><span class="p">)</span>
@@ -442,7 +533,32 @@
             <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblstatus</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;Venta Anulada&#39;</span><span class="p">)</span>
             <span class="n">ventas</span><span class="o">.</span><span class="n">ventas</span><span class="o">.</span><span class="n">mostrarVentasfac</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error baja venta: &quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">.</span><span class="n">lastError</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">())</span></div></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error baja venta: &quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">.</span><span class="n">lastError</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Conexion.productoExistente"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.productoExistente">[documentos]</a>    <span class="k">def</span> <span class="nf">productoExistente</span><span class="p">(</span><span class="n">nombre</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que busca y valida si existe un producto en la base de datos</span>
+
+<span class="sd">        :param nombre: Nombre del producto</span>
+<span class="sd">        :type nombre: String</span>
+<span class="sd">        :return: Retorna una coleccion de datos de un producto</span>
+<span class="sd">        :rtype: producto</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">producto</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
+        <span class="n">query</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="s1">&#39;select codigo, precio_unidad, stock from articulos where nombre = :nombre&#39;</span><span class="p">)</span>
+        <span class="n">query</span><span class="o">.</span><span class="n">bindValue</span><span class="p">(</span><span class="s1">&#39;:nombre&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">nombre</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">exec_</span><span class="p">():</span>
+            <span class="k">while</span> <span class="n">query</span><span class="o">.</span><span class="n">next</span><span class="p">():</span>
+                <span class="n">producto</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+                <span class="n">producto</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
+                <span class="n">producto</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">producto</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+                <span class="k">return</span> <span class="n">producto</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div></div>
 </pre></div>
 
           </div>

@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>importar &#8212; documentación de a19albertopp - v0.5.2</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Código fuente para importar</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">xlrd</span><span class="o">,</span> <span class="nn">var</span><span class="o">,</span> <span class="nn">events</span><span class="o">,</span> <span class="nn">conexion</span>
+<span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span>
+
+<span class="kn">from</span> <span class="nn">xlrd</span> <span class="kn">import</span> <span class="n">open_workbook</span>
+
+
+<div class="viewcode-block" id="Importar"><a class="viewcode-back" href="../src/importar.html#importar.Importar">[documentos]</a><span class="k">class</span> <span class="nc">Importar</span><span class="p">():</span>
+<div class="viewcode-block" id="Importar.importarDatos"><a class="viewcode-back" href="../src/importar.html#importar.Importar.importarDatos">[documentos]</a>    <span class="k">def</span> <span class="nf">importarDatos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que importa los datos de productos de un archivo .xls y se agregan a la base de datos o si existen se actualiza el precio y stock.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFileDialog</span><span class="o">.</span><span class="n">Options</span><span class="p">()</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">filedlgabrir</span><span class="o">.</span><span class="n">getOpenFileName</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;Importar Productos&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;*.xls&#39;</span><span class="p">,</span>
+                                                        <span class="n">options</span><span class="o">=</span><span class="n">option</span><span class="p">)</span>
+            <span class="n">mensaje</span> <span class="o">=</span> <span class="s1">&#39;Desea importar ese archivo?&#39;</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">validar</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">filedlgabrir</span><span class="o">.</span><span class="n">Accepted</span> <span class="ow">and</span> <span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">events</span><span class="o">.</span><span class="n">Eventos</span><span class="o">.</span><span class="n">AbrirAviso</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">validar</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+
+                    <span class="n">documento</span> <span class="o">=</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">open_workbook</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+                    <span class="n">frutas</span> <span class="o">=</span> <span class="n">documento</span><span class="o">.</span><span class="n">sheet_by_index</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">fila</span> <span class="o">=</span> <span class="n">frutas</span><span class="o">.</span><span class="n">nrows</span>
+                    <span class="n">col</span> <span class="o">=</span> <span class="n">frutas</span><span class="o">.</span><span class="n">ncols</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">fila</span><span class="p">):</span>
+                        <span class="n">producto</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+                            <span class="n">producto</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frutas</span><span class="o">.</span><span class="n">cell_value</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+                        <span class="n">producto</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">producto</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="n">fruta</span> <span class="o">=</span> <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">productoExistente</span><span class="p">(</span><span class="n">producto</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                        <span class="k">if</span> <span class="n">fruta</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">altaPro</span><span class="p">(</span><span class="n">producto</span><span class="p">)</span>
+
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">stock1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">producto</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                            <span class="n">stock2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fruta</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+                            <span class="n">producto</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">stock1</span> <span class="o">+</span> <span class="n">stock2</span>
+                            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">modifProducto</span><span class="p">(</span><span class="n">fruta</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">producto</span><span class="p">)</span>
+                            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarProductos</span><span class="p">()</span>
+                    <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">mostrarProductos</span><span class="p">()</span>
+                    <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblstatus</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s1">&#39;Productos importados&#39;</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error importar datos &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">a19albertopp</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navegación</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Código de módulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Alberto Portas Perez.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

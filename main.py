@@ -7,7 +7,7 @@ from datetime import datetime
 from venaviso import *
 from ventanaAbout import *
 import sys
-import var, events,clients,conexion,productos,printer,ventas
+import var, events,clients,conexion,productos,printer,ventas,importar
 
 class main(QtWidgets.QMainWindow):
 
@@ -20,6 +20,7 @@ class main(QtWidgets.QMainWindow):
         var.filedlgabrir = FileDialogAbrir()
         var.filedlimprimir=PrintDialogAbrir()
         var.dlgaviso=DialogAviso()
+        var.dlgabout=DialogAbout()
         op=False
         """BOTONES"""
         QtWidgets.QAction(self).triggered.connect(self.close)
@@ -32,7 +33,7 @@ class main(QtWidgets.QMainWindow):
         var.ui.btnLimpiarPro.clicked.connect(productos.Productos.limpiarPro)
         var.ui.tablaPro.clicked.connect(productos.Productos.cargarPro)
         var.ui.tablaPro.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
-        #var.ui.actionAbout.triggered.connect(events.Eventos.AvisoAbout)
+        var.ui.actionAbout.triggered.connect(events.Eventos.AbrirAbout)
 
 
 
@@ -49,6 +50,8 @@ class main(QtWidgets.QMainWindow):
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
         var.ui.actionAbrir.triggered.connect(events.Eventos.AbrirDir)
         var.ui.actionrestarurarBD.triggered.connect(events.Eventos.restaurarBD)
+        var.ui.actionRecuperar_Backup.triggered.connect(events.Eventos.restaurarBD)
+        var.ui.actionImportar_Datos.triggered.connect(importar.Importar.importarDatos)
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir)
 
         var.ui.editDni.editingFinished.connect(events.Eventos.validoDNI)
@@ -56,6 +59,7 @@ class main(QtWidgets.QMainWindow):
         var.ui.toolbarArchivo.triggered.connect(events.Eventos.AbrirDir)
         var.ui.ToolbarImprimir.triggered.connect(events.Eventos.AbrirImprimir)
         var.ui.toolbarBackup.triggered.connect(events.Eventos.Backup)
+        var.ui.actionCrear_backup.triggered.connect(events.Eventos.Backup)
         var.ui.actionImprimir.triggered.connect(events.Eventos.AbrirImprimir)
         var.ui.cmbProvincia.activated[str].connect(clients.Clients.selProv)
         var.ui.btnCalendar.clicked.connect(clients.Clients.abrirCalendar)
@@ -96,7 +100,7 @@ class main(QtWidgets.QMainWindow):
 
         conexion.Conexion.db_connect(var.filebd)
         conexion.Conexion.mostrarClientes(op)
-        conexion.Conexion.mostrarProductos(self)
+        conexion.Conexion.mostrarProductos()
         ventas.ventas.prepararventas(0)
         var.ui.btnFacturar.clicked.connect(ventas.ventas.crearFactura)
         var.ui.btnAnular.clicked.connect(ventas.ventas.borrarFactura)
