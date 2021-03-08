@@ -56,7 +56,7 @@ class Eventos():
         except Exception as error:
             print('Error closesalir: %s' % str(error))
 
-    def validoDNI(self):
+    def validoDNI():
         """
 
         Módulo que según sea correcto el dni, muestra una imagen distinta
@@ -76,7 +76,6 @@ class Eventos():
                 var.ui.lblValido.setStyleSheet('QLabel {color: red;}')
                 var.ui.lblValido.setText('X')
                 var.ui.editDni.setText(dni.upper())
-                # clients.Clients.limpiarCli()
 
         except:
             print('Error módulo escribir valido DNI')
@@ -239,7 +238,7 @@ class Eventos():
         except Exception as error:
             print('Error restaurarBD: %s' % str(error))
 
-    def AbrirAbout():
+    def AbrirAbout(self):
         """
 
         Modulo que abre una ventana de About
@@ -258,7 +257,7 @@ class Eventos():
         except Exception as error:
             print('Error Abrir About: %s ' % str(error))
 
-    def cerrarAvisoAbout():
+    def cerrarAvisoAbout(self):
         """
 
         Modulo que cierra la ventana About

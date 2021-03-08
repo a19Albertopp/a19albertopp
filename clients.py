@@ -153,7 +153,7 @@ class Clients():
                     clitab.append(i.text())
                     k += 1
             newcli.append(vpro)
-            var.pay2 = Clients.selPago()
+            var.pay2 = Clients.selPago(self)
             newcli.append(var.sex)
             newcli.append(var.pay2)
             newcli.append(var.ui.spinEdad.value())

@@ -308,5 +308,3 @@ class ventas():
         except Exception as error:
             print('Error buscarFact: %s' % str(error))
 
-        except Exception as error:
-            print('Error anularVenta: %s' % str(error))
